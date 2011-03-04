@@ -154,7 +154,7 @@ NSString *kOCErrorInfoKeyMessage = @"kOCErrorInfoKeyMessage";
     NSAssert(startTime > 0, @"Start time not set");
     NSAssert(stopTime > 0, @"Stop time not set");    
     long elapsed =  self.stopTime-self.startTime;
-    NSLog(@"elapsed: %d",elapsed);
+    NSLog(@"elapsed: %ld",elapsed);
     self.startTime = -1;
     self.stopTime = -1;
     return elapsed;
