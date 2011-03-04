@@ -38,7 +38,7 @@
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		288765A40DF7441C002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		29995BC5131F1D2100E6C4D6 /* OCSpec.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = OCSpec.xcodeproj; path = ../OCSpec.xcodeproj; sourceTree = SOURCE_ROOT; };
-		29995BCE131F1D8900E6C4D6 /* SpecRunnerExample-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "SpecRunnerExample-Info.plist"; path = "../SpecRunnerExample-Info.plist"; sourceTree = "<group>"; };
+		29995BCE131F1D8900E6C4D6 /* SpecRunnerExample-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "SpecRunnerExample-Info.plist"; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = ../main.m; sourceTree = "<group>"; };
 		29CED7C2131F2B2700B7D892 /* TestSpec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestSpec.h; sourceTree = "<group>"; };
 		29CED7C3131F2B2700B7D892 /* TestSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestSpec.m; sourceTree = "<group>"; };
