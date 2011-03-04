@@ -1,0 +1,379 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 45;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		29995B73131F1C0200E6C4D6 /* OCExampleGroup.h in Headers */ = {isa = PBXBuildFile; fileRef = 29995B51131F1C0200E6C4D6 /* OCExampleGroup.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		29995B74131F1C0200E6C4D6 /* OCExampleGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 29995B52131F1C0200E6C4D6 /* OCExampleGroup.m */; };
+		29995B75131F1C0200E6C4D6 /* OCExampleResult.h in Headers */ = {isa = PBXBuildFile; fileRef = 29995B53131F1C0200E6C4D6 /* OCExampleResult.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		29995B76131F1C0200E6C4D6 /* OCExampleResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 29995B54131F1C0200E6C4D6 /* OCExampleResult.m */; };
+		29995B77131F1C0200E6C4D6 /* OCSpec.h in Headers */ = {isa = PBXBuildFile; fileRef = 29995B55131F1C0200E6C4D6 /* OCSpec.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		29995B78131F1C0200E6C4D6 /* OCSpecRunner.h in Headers */ = {isa = PBXBuildFile; fileRef = 29995B56131F1C0200E6C4D6 /* OCSpecRunner.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		29995B79131F1C0200E6C4D6 /* OCSpecRunner.m in Sources */ = {isa = PBXBuildFile; fileRef = 29995B57131F1C0200E6C4D6 /* OCSpecRunner.m */; };
+		29995B7A131F1C0200E6C4D6 /* OCSpec_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 29995B58131F1C0200E6C4D6 /* OCSpec_Prefix.pch */; };
+		29995B7C131F1C0200E6C4D6 /* SpecRunnerAppDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 29995B5C131F1C0200E6C4D6 /* SpecRunnerAppDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		29995B7D131F1C0200E6C4D6 /* SpecRunnerAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 29995B5D131F1C0200E6C4D6 /* SpecRunnerAppDelegate.m */; };
+		29995B7E131F1C0200E6C4D6 /* SpecRunnerExampleResultCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 29995B5E131F1C0200E6C4D6 /* SpecRunnerExampleResultCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		29995B7F131F1C0200E6C4D6 /* SpecRunnerExampleResultCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 29995B5F131F1C0200E6C4D6 /* SpecRunnerExampleResultCell.m */; };
+		29995B80131F1C0200E6C4D6 /* SpecRunnerGroupResults.h in Headers */ = {isa = PBXBuildFile; fileRef = 29995B60131F1C0200E6C4D6 /* SpecRunnerGroupResults.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		29995B81131F1C0200E6C4D6 /* SpecRunnerGroupResults.m in Sources */ = {isa = PBXBuildFile; fileRef = 29995B61131F1C0200E6C4D6 /* SpecRunnerGroupResults.m */; };
+		29995B82131F1C0200E6C4D6 /* SpecRunnerLabelValueCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 29995B62131F1C0200E6C4D6 /* SpecRunnerLabelValueCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		29995B83131F1C0200E6C4D6 /* SpecRunnerLabelValueCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 29995B63131F1C0200E6C4D6 /* SpecRunnerLabelValueCell.m */; };
+		29995B84131F1C0200E6C4D6 /* SpecRunnerSpecResultDetailsController.h in Headers */ = {isa = PBXBuildFile; fileRef = 29995B64131F1C0200E6C4D6 /* SpecRunnerSpecResultDetailsController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		29995B85131F1C0200E6C4D6 /* SpecRunnerSpecResultDetailsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 29995B65131F1C0200E6C4D6 /* SpecRunnerSpecResultDetailsController.m */; };
+		29995B86131F1C0200E6C4D6 /* SpecRunnerSpecResultErrorDetailsController.h in Headers */ = {isa = PBXBuildFile; fileRef = 29995B66131F1C0200E6C4D6 /* SpecRunnerSpecResultErrorDetailsController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		29995B87131F1C0200E6C4D6 /* SpecRunnerSpecResultErrorDetailsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 29995B67131F1C0200E6C4D6 /* SpecRunnerSpecResultErrorDetailsController.m */; };
+		29995B88131F1C0200E6C4D6 /* SpecRunnerSpecResultsController.h in Headers */ = {isa = PBXBuildFile; fileRef = 29995B68131F1C0200E6C4D6 /* SpecRunnerSpecResultsController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		29995B89131F1C0200E6C4D6 /* SpecRunnerSpecResultsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 29995B69131F1C0200E6C4D6 /* SpecRunnerSpecResultsController.m */; };
+		29995BF9131F25B300E6C4D6 /* SpecRunnerStatusView.h in Headers */ = {isa = PBXBuildFile; fileRef = 29995BF7131F25B300E6C4D6 /* SpecRunnerStatusView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		29995BFA131F25B300E6C4D6 /* SpecRunnerStatusView.m in Sources */ = {isa = PBXBuildFile; fileRef = 29995BF8131F25B300E6C4D6 /* SpecRunnerStatusView.m */; };
+		AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AACBBE490F95108600F1A2B1 /* Foundation.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		29995B51131F1C0200E6C4D6 /* OCExampleGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCExampleGroup.h; sourceTree = "<group>"; };
+		29995B52131F1C0200E6C4D6 /* OCExampleGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCExampleGroup.m; sourceTree = "<group>"; };
+		29995B53131F1C0200E6C4D6 /* OCExampleResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCExampleResult.h; sourceTree = "<group>"; };
+		29995B54131F1C0200E6C4D6 /* OCExampleResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCExampleResult.m; sourceTree = "<group>"; };
+		29995B55131F1C0200E6C4D6 /* OCSpec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCSpec.h; sourceTree = "<group>"; };
+		29995B56131F1C0200E6C4D6 /* OCSpecRunner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCSpecRunner.h; sourceTree = "<group>"; };
+		29995B57131F1C0200E6C4D6 /* OCSpecRunner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCSpecRunner.m; sourceTree = "<group>"; };
+		29995B58131F1C0200E6C4D6 /* OCSpec_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCSpec_Prefix.pch; sourceTree = "<group>"; };
+		29995B5C131F1C0200E6C4D6 /* SpecRunnerAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpecRunnerAppDelegate.h; sourceTree = "<group>"; };
+		29995B5D131F1C0200E6C4D6 /* SpecRunnerAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpecRunnerAppDelegate.m; sourceTree = "<group>"; };
+		29995B5E131F1C0200E6C4D6 /* SpecRunnerExampleResultCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpecRunnerExampleResultCell.h; sourceTree = "<group>"; };
+		29995B5F131F1C0200E6C4D6 /* SpecRunnerExampleResultCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpecRunnerExampleResultCell.m; sourceTree = "<group>"; };
+		29995B60131F1C0200E6C4D6 /* SpecRunnerGroupResults.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpecRunnerGroupResults.h; sourceTree = "<group>"; };
+		29995B61131F1C0200E6C4D6 /* SpecRunnerGroupResults.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpecRunnerGroupResults.m; sourceTree = "<group>"; };
+		29995B62131F1C0200E6C4D6 /* SpecRunnerLabelValueCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpecRunnerLabelValueCell.h; sourceTree = "<group>"; };
+		29995B63131F1C0200E6C4D6 /* SpecRunnerLabelValueCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpecRunnerLabelValueCell.m; sourceTree = "<group>"; };
+		29995B64131F1C0200E6C4D6 /* SpecRunnerSpecResultDetailsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpecRunnerSpecResultDetailsController.h; sourceTree = "<group>"; };
+		29995B65131F1C0200E6C4D6 /* SpecRunnerSpecResultDetailsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpecRunnerSpecResultDetailsController.m; sourceTree = "<group>"; };
+		29995B66131F1C0200E6C4D6 /* SpecRunnerSpecResultErrorDetailsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpecRunnerSpecResultErrorDetailsController.h; sourceTree = "<group>"; };
+		29995B67131F1C0200E6C4D6 /* SpecRunnerSpecResultErrorDetailsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpecRunnerSpecResultErrorDetailsController.m; sourceTree = "<group>"; };
+		29995B68131F1C0200E6C4D6 /* SpecRunnerSpecResultsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpecRunnerSpecResultsController.h; sourceTree = "<group>"; };
+		29995B69131F1C0200E6C4D6 /* SpecRunnerSpecResultsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpecRunnerSpecResultsController.m; sourceTree = "<group>"; };
+		29995B8D131F1C0A00E6C4D6 /* class.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = class.h; sourceTree = "<group>"; };
+		29995B8E131F1C0A00E6C4D6 /* class.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = class.m; sourceTree = "<group>"; };
+		29995B8F131F1C0B00E6C4D6 /* TemplateInfo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = TemplateInfo.plist; sourceTree = "<group>"; };
+		29995B98131F1C6A00E6C4D6 /* SpecRunnerExample-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SpecRunnerExample-Info.plist"; sourceTree = "<group>"; };
+		29995BF7131F25B300E6C4D6 /* SpecRunnerStatusView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpecRunnerStatusView.h; sourceTree = "<group>"; };
+		29995BF8131F25B300E6C4D6 /* SpecRunnerStatusView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpecRunnerStatusView.m; sourceTree = "<group>"; };
+		AACBBE490F95108600F1A2B1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		D2AAC07E0554694100DB518D /* libOCSpec.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libOCSpec.a; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D2AAC07C0554694100DB518D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		034768DFFF38A50411DB9C8B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D2AAC07E0554694100DB518D /* libOCSpec.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		0867D691FE84028FC02AAC07 /* OCSpec */ = {
+			isa = PBXGroup;
+			children = (
+				29995B4F131F1C0200E6C4D6 /* Source */,
+				29995B8B131F1C0A00E6C4D6 /* Templates */,
+				0867D69AFE84028FC02AAC07 /* Frameworks */,
+				034768DFFF38A50411DB9C8B /* Products */,
+				29995B98131F1C6A00E6C4D6 /* SpecRunnerExample-Info.plist */,
+			);
+			name = OCSpec;
+			sourceTree = "<group>";
+		};
+		0867D69AFE84028FC02AAC07 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				AACBBE490F95108600F1A2B1 /* Foundation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		29995B4F131F1C0200E6C4D6 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				29995B58131F1C0200E6C4D6 /* OCSpec_Prefix.pch */,
+				29995B50131F1C0200E6C4D6 /* OCSpec */,
+				29995B59131F1C0200E6C4D6 /* SpecRunner */,
+			);
+			path = Source;
+			sourceTree = "<group>";
+		};
+		29995B50131F1C0200E6C4D6 /* OCSpec */ = {
+			isa = PBXGroup;
+			children = (
+				29995B55131F1C0200E6C4D6 /* OCSpec.h */,
+				29995B56131F1C0200E6C4D6 /* OCSpecRunner.h */,
+				29995B57131F1C0200E6C4D6 /* OCSpecRunner.m */,
+				29995B51131F1C0200E6C4D6 /* OCExampleGroup.h */,
+				29995B52131F1C0200E6C4D6 /* OCExampleGroup.m */,
+				29995B53131F1C0200E6C4D6 /* OCExampleResult.h */,
+				29995B54131F1C0200E6C4D6 /* OCExampleResult.m */,
+			);
+			path = OCSpec;
+			sourceTree = "<group>";
+		};
+		29995B59131F1C0200E6C4D6 /* SpecRunner */ = {
+			isa = PBXGroup;
+			children = (
+				29995B5A131F1C0200E6C4D6 /* Classes */,
+				29995B6B131F1C0200E6C4D6 /* Resources */,
+			);
+			path = SpecRunner;
+			sourceTree = "<group>";
+		};
+		29995B5A131F1C0200E6C4D6 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				29995B5C131F1C0200E6C4D6 /* SpecRunnerAppDelegate.h */,
+				29995B5D131F1C0200E6C4D6 /* SpecRunnerAppDelegate.m */,
+				29995B68131F1C0200E6C4D6 /* SpecRunnerSpecResultsController.h */,
+				29995B69131F1C0200E6C4D6 /* SpecRunnerSpecResultsController.m */,
+				29995B5E131F1C0200E6C4D6 /* SpecRunnerExampleResultCell.h */,
+				29995B5F131F1C0200E6C4D6 /* SpecRunnerExampleResultCell.m */,
+				29995BF7131F25B300E6C4D6 /* SpecRunnerStatusView.h */,
+				29995BF8131F25B300E6C4D6 /* SpecRunnerStatusView.m */,
+				29995B64131F1C0200E6C4D6 /* SpecRunnerSpecResultDetailsController.h */,
+				29995B65131F1C0200E6C4D6 /* SpecRunnerSpecResultDetailsController.m */,
+				29995B60131F1C0200E6C4D6 /* SpecRunnerGroupResults.h */,
+				29995B61131F1C0200E6C4D6 /* SpecRunnerGroupResults.m */,
+				29995B62131F1C0200E6C4D6 /* SpecRunnerLabelValueCell.h */,
+				29995B63131F1C0200E6C4D6 /* SpecRunnerLabelValueCell.m */,
+				29995B66131F1C0200E6C4D6 /* SpecRunnerSpecResultErrorDetailsController.h */,
+				29995B67131F1C0200E6C4D6 /* SpecRunnerSpecResultErrorDetailsController.m */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		29995B6B131F1C0200E6C4D6 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		29995B8B131F1C0A00E6C4D6 /* Templates */ = {
+			isa = PBXGroup;
+			children = (
+				29995B8C131F1C0A00E6C4D6 /* OCSpec subclass.pbfiletemplate */,
+			);
+			path = Templates;
+			sourceTree = "<group>";
+		};
+		29995B8C131F1C0A00E6C4D6 /* OCSpec subclass.pbfiletemplate */ = {
+			isa = PBXGroup;
+			children = (
+				29995B8D131F1C0A00E6C4D6 /* class.h */,
+				29995B8E131F1C0A00E6C4D6 /* class.m */,
+				29995B8F131F1C0B00E6C4D6 /* TemplateInfo.plist */,
+			);
+			path = "OCSpec subclass.pbfiletemplate";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		D2AAC07A0554694100DB518D /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				29995B73131F1C0200E6C4D6 /* OCExampleGroup.h in Headers */,
+				29995B75131F1C0200E6C4D6 /* OCExampleResult.h in Headers */,
+				29995B77131F1C0200E6C4D6 /* OCSpec.h in Headers */,
+				29995B78131F1C0200E6C4D6 /* OCSpecRunner.h in Headers */,
+				29995B7A131F1C0200E6C4D6 /* OCSpec_Prefix.pch in Headers */,
+				29995B7C131F1C0200E6C4D6 /* SpecRunnerAppDelegate.h in Headers */,
+				29995B7E131F1C0200E6C4D6 /* SpecRunnerExampleResultCell.h in Headers */,
+				29995B80131F1C0200E6C4D6 /* SpecRunnerGroupResults.h in Headers */,
+				29995B82131F1C0200E6C4D6 /* SpecRunnerLabelValueCell.h in Headers */,
+				29995B84131F1C0200E6C4D6 /* SpecRunnerSpecResultDetailsController.h in Headers */,
+				29995B86131F1C0200E6C4D6 /* SpecRunnerSpecResultErrorDetailsController.h in Headers */,
+				29995B88131F1C0200E6C4D6 /* SpecRunnerSpecResultsController.h in Headers */,
+				29995BF9131F25B300E6C4D6 /* SpecRunnerStatusView.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		D2AAC07D0554694100DB518D /* OCSpec */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1DEB921E08733DC00010E9CD /* Build configuration list for PBXNativeTarget "OCSpec" */;
+			buildPhases = (
+				D2AAC07A0554694100DB518D /* Headers */,
+				D2AAC07B0554694100DB518D /* Sources */,
+				D2AAC07C0554694100DB518D /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = OCSpec;
+			productName = OCSpec;
+			productReference = D2AAC07E0554694100DB518D /* libOCSpec.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		0867D690FE84028FC02AAC07 /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = 1DEB922208733DC00010E9CD /* Build configuration list for PBXProject "OCSpec" */;
+			compatibilityVersion = "Xcode 3.1";
+			developmentRegion = English;
+			hasScannedForEncodings = 1;
+			knownRegions = (
+				English,
+				Japanese,
+				French,
+				German,
+			);
+			mainGroup = 0867D691FE84028FC02AAC07 /* OCSpec */;
+			productRefGroup = 034768DFFF38A50411DB9C8B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D2AAC07D0554694100DB518D /* OCSpec */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		D2AAC07B0554694100DB518D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				29995B74131F1C0200E6C4D6 /* OCExampleGroup.m in Sources */,
+				29995B76131F1C0200E6C4D6 /* OCExampleResult.m in Sources */,
+				29995B79131F1C0200E6C4D6 /* OCSpecRunner.m in Sources */,
+				29995B7D131F1C0200E6C4D6 /* SpecRunnerAppDelegate.m in Sources */,
+				29995B7F131F1C0200E6C4D6 /* SpecRunnerExampleResultCell.m in Sources */,
+				29995B81131F1C0200E6C4D6 /* SpecRunnerGroupResults.m in Sources */,
+				29995B83131F1C0200E6C4D6 /* SpecRunnerLabelValueCell.m in Sources */,
+				29995B85131F1C0200E6C4D6 /* SpecRunnerSpecResultDetailsController.m in Sources */,
+				29995B87131F1C0200E6C4D6 /* SpecRunnerSpecResultErrorDetailsController.m in Sources */,
+				29995B89131F1C0200E6C4D6 /* SpecRunnerSpecResultsController.m in Sources */,
+				29995BFA131F25B300E6C4D6 /* SpecRunnerStatusView.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		1DEB921F08733DC00010E9CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				COPY_PHASE_STRIP = NO;
+				DSTROOT = /tmp/OCSpec.dst;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = Source/OCSpec_Prefix.pch;
+				INSTALL_PATH = /usr/local/lib;
+				PRODUCT_NAME = OCSpec;
+				PUBLIC_HEADERS_FOLDER_PATH = ../Headers;
+			};
+			name = Debug;
+		};
+		1DEB922008733DC00010E9CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				DSTROOT = /tmp/OCSpec.dst;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = Source/OCSpec_Prefix.pch;
+				INSTALL_PATH = /usr/local/lib;
+				PRODUCT_NAME = OCSpec;
+				PUBLIC_HEADERS_FOLDER_PATH = ../Headers;
+			};
+			name = Release;
+		};
+		1DEB922308733DC00010E9CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_CHECK_SWITCH_STATEMENTS = YES;
+				GCC_WARN_PEDANTIC = YES;
+				GCC_WARN_SHADOW = YES;
+				GCC_WARN_STRICT_SELECTOR_MATCH = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				OTHER_LDFLAGS = "-ObjC";
+				PREBINDING = NO;
+				RUN_CLANG_STATIC_ANALYZER = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		1DEB922408733DC00010E9CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_CHECK_SWITCH_STATEMENTS = YES;
+				GCC_WARN_PEDANTIC = YES;
+				GCC_WARN_SHADOW = YES;
+				GCC_WARN_STRICT_SELECTOR_MATCH = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				OTHER_LDFLAGS = "-ObjC";
+				PREBINDING = NO;
+				SDKROOT = iphoneos;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1DEB921E08733DC00010E9CD /* Build configuration list for PBXNativeTarget "OCSpec" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1DEB921F08733DC00010E9CD /* Debug */,
+				1DEB922008733DC00010E9CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1DEB922208733DC00010E9CD /* Build configuration list for PBXProject "OCSpec" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1DEB922308733DC00010E9CD /* Debug */,
+				1DEB922408733DC00010E9CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 0867D690FE84028FC02AAC07 /* Project object */;
+}

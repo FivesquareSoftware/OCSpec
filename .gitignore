@@ -1,0 +1,10 @@
+Icon?
+build
+*.mode*
+*.pbxuser
+*.perspectivev3
+*.log
+*.dSYM
+*.xcworkspace
+LiveNationWSDeveloper.xcconfig
+LiveNationWSQA.xcconfig
