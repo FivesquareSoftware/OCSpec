@@ -6,5 +6,5 @@ build
 *.log
 *.dSYM
 *.xcworkspace
-LiveNationWSDeveloper.xcconfig
-LiveNationWSQA.xcconfig
+xcuserdata
+.svn

@@ -135,7 +135,6 @@
 			isa = PBXGroup;
 			children = (
 				29995B5A131F1C0200E6C4D6 /* Classes */,
-				29995B6B131F1C0200E6C4D6 /* Resources */,
 			);
 			path = SpecRunner;
 			sourceTree = "<group>";
@@ -161,13 +160,6 @@
 				29995B67131F1C0200E6C4D6 /* SpecRunnerSpecResultErrorDetailsController.m */,
 			);
 			path = Classes;
-			sourceTree = "<group>";
-		};
-		29995B6B131F1C0200E6C4D6 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Resources;
 			sourceTree = "<group>";
 		};
 		29995B8B131F1C0A00E6C4D6 /* Templates */ = {
@@ -321,7 +313,7 @@
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_CHECK_SWITCH_STATEMENTS = YES;
-				GCC_WARN_PEDANTIC = YES;
+				GCC_WARN_PEDANTIC = NO;
 				GCC_WARN_SHADOW = YES;
 				GCC_WARN_STRICT_SELECTOR_MATCH = YES;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -341,7 +333,7 @@
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_CHECK_SWITCH_STATEMENTS = YES;
-				GCC_WARN_PEDANTIC = YES;
+				GCC_WARN_PEDANTIC = NO;
 				GCC_WARN_SHADOW = YES;
 				GCC_WARN_STRICT_SELECTOR_MATCH = YES;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;

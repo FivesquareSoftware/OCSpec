@@ -35,6 +35,11 @@
 #import <CoreGraphics/CoreGraphics.h>
 
 
+@interface SpecRunnerExampleResultCell()
+- (UIImage *) statusImageForResult:(OCExampleResult *)aResult;
+@end
+
+
 @implementation SpecRunnerExampleResultCell
 
 
@@ -52,28 +57,18 @@
 	}
 }
 
-
-- (void) dealloc {
-	[statusImage release]; statusImage = nil;
-	[super dealloc];
-}
-
-//- (id) initWithStyle:(UITableViewCellStyle)aStyle reuseIdentifier:(NSString *)aReuseIdentifier {
-//	self = [super initWithStyle:aStyle reuseIdentifier:aReuseIdentifier];
-//	if (self != nil) {
-//		self.statusView = [[SpecRunnerStatusView alloc] initWithFrame:CGRectMake(0, 0, 12.f, 12.f)];
-//		[self.contentView addSubview:statusView];
-//		[statusView release];
-//	}
-//	return self;
-//}
-
 - (UIImage *) statusImage {
 	if(statusImage == nil) {
 		statusImage = [[self statusImageForResult:self.result] retain];
 	}
 	return statusImage;
 }
+
+- (void) dealloc {
+	[statusImage release]; statusImage = nil;
+	[super dealloc];
+}
+
 
 - (UIImage *) statusImageForResult:(OCExampleResult *)aResult {
 	if([NSThread currentThread] != [NSThread mainThread]) {
