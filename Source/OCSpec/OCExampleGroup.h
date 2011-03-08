@@ -31,10 +31,13 @@
 
 #import <Foundation/Foundation.h>
 
+@class SpecHelper;
 
 @interface OCExampleGroup : NSObject {
-
+	SpecHelper *specHelper;
 }
+
+@property (nonatomic, retain) SpecHelper *specHelper;
 
 + (NSArray *) groups;
 
