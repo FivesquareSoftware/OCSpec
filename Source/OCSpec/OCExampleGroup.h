@@ -41,4 +41,7 @@
 
 + (NSArray *) groups;
 
+/** To support assertion frameworks. */
+- (void)failWithException:(NSException *)exception;
+
 @end
