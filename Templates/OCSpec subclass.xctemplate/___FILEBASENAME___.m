@@ -6,7 +6,7 @@
 //  Copyright ___YEAR___ ___ORGANIZATIONNAME___. All rights reserved.
 //
 
-___OPTIONALHEADERIMPORTLINE___
+#import "___FILEBASENAME___.h"
 
 // This class will be instantiated for you and made available in the property "self.specHelper", store your cross-test data and helper methods there
 #import "SpecHelper.h"
