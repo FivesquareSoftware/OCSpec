@@ -64,7 +64,7 @@
 	self = [super initWithStyle:aStyle reuseIdentifier:aReuseIdentifier];
 	if (self != nil) {
 
-		self.keyLabel = [[UILabel alloc] initWithFrame:CGRectMake(0.0, 0.0, kSpecRunnerLabelValueCellLabelWidth, kSpecRunnerLabelValueCellLabelHeight)];
+		keyLabel = [[UILabel alloc] initWithFrame:CGRectMake(0.0, 0.0, kSpecRunnerLabelValueCellLabelWidth, kSpecRunnerLabelValueCellLabelHeight)];
 		keyLabel.backgroundColor = [UIColor clearColor];
 		keyLabel.font = [UIFont boldSystemFontOfSize:12.0];
 		keyLabel.textAlignment = UITextAlignmentRight;
@@ -78,7 +78,7 @@
 											, self.frame.size.width - (kSpecRunnerLabelValueCellLabelWidth + (kSpecRunnerLabelValueCellLabelHorizontalPadding * 3.0))
 											, kSpecRunnerLabelValueCellLabelHeight);
 		
-		self.valueLabel = [[UILabel alloc] initWithFrame:valueLabelFrame];
+		valueLabel = [[UILabel alloc] initWithFrame:valueLabelFrame];
 		valueLabel.backgroundColor = [UIColor clearColor];
 		valueLabel.font = [UIFont boldSystemFontOfSize:12.0];
 		valueLabel.textColor = [UIColor blackColor];

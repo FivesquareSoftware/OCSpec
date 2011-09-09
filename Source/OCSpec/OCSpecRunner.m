@@ -30,6 +30,7 @@
 
 #import "OCSpecRunner.h"
 
+#import "OCExampleGroup.h"
 #import "OCExampleResult.h"
 
 #import <Foundation/NSObjCRuntime.h>

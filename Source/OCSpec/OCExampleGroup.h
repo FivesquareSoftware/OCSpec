@@ -33,7 +33,19 @@
 
 @class SpecHelper;
 
-@interface OCExampleGroup : NSObject {
+
+/** Mostly here just to satisfy compiler. */
+@protocol OCExampleGroup <NSObject>
+
+@optional
+- (void)beforeAll;
+- (void)beforeEach;
+- (void)afterEach;
+- (void)afterAll;
+
+@end
+
+@interface OCExampleGroup : NSObject <OCExampleGroup> {
 	SpecHelper *specHelper;
 }
 
@@ -45,3 +57,5 @@
 - (void)failWithException:(NSException *)exception;
 
 @end
+
+

@@ -43,9 +43,6 @@
 		29995B56131F1C0200E6C4D6 /* OCSpecRunner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCSpecRunner.h; sourceTree = "<group>"; };
 		29995B57131F1C0200E6C4D6 /* OCSpecRunner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCSpecRunner.m; sourceTree = "<group>"; };
 		29995B58131F1C0200E6C4D6 /* OCSpec_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCSpec_Prefix.pch; sourceTree = "<group>"; };
-		29995B8D131F1C0A00E6C4D6 /* class.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = class.h; sourceTree = "<group>"; };
-		29995B8E131F1C0A00E6C4D6 /* class.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = class.m; sourceTree = "<group>"; };
-		29995B8F131F1C0B00E6C4D6 /* TemplateInfo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = TemplateInfo.plist; sourceTree = "<group>"; };
 		A4626A5D1419922D005544D6 /* SpecRunnerAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpecRunnerAppDelegate.h; sourceTree = "<group>"; };
 		A4626A5E1419922D005544D6 /* SpecRunnerAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpecRunnerAppDelegate.m; sourceTree = "<group>"; };
 		A4626A5F1419922D005544D6 /* SpecRunnerExampleResultCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpecRunnerExampleResultCell.h; sourceTree = "<group>"; };
@@ -90,7 +87,6 @@
 			isa = PBXGroup;
 			children = (
 				29995B4F131F1C0200E6C4D6 /* Source */,
-				29995B8B131F1C0A00E6C4D6 /* Templates */,
 				0867D69AFE84028FC02AAC07 /* Frameworks */,
 				034768DFFF38A50411DB9C8B /* Products */,
 			);
@@ -150,24 +146,6 @@
 				A4626A6C1419922D005544D6 /* SpecRunnerStatusView.m */,
 			);
 			path = SpecRunner;
-			sourceTree = "<group>";
-		};
-		29995B8B131F1C0A00E6C4D6 /* Templates */ = {
-			isa = PBXGroup;
-			children = (
-				29995B8C131F1C0A00E6C4D6 /* OCSpec subclass.pbfiletemplate */,
-			);
-			path = Templates;
-			sourceTree = "<group>";
-		};
-		29995B8C131F1C0A00E6C4D6 /* OCSpec subclass.pbfiletemplate */ = {
-			isa = PBXGroup;
-			children = (
-				29995B8D131F1C0A00E6C4D6 /* class.h */,
-				29995B8E131F1C0A00E6C4D6 /* class.m */,
-				29995B8F131F1C0B00E6C4D6 /* TemplateInfo.plist */,
-			);
-			path = "OCSpec subclass.pbfiletemplate";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

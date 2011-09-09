@@ -34,6 +34,11 @@
 
 #import "OCSpec.h"
 
+
+@interface SpecRunnerAppDelegate()
+- (void) runSpecsInAnotherThread;
+@end
+
 @implementation SpecRunnerAppDelegate
 
 @synthesize window;
@@ -58,7 +63,7 @@
 	
 	[window makeKeyAndVisible];
 
-	self.srunner = [[OCSpecRunner alloc] initWithExampleGroups:[OCExampleGroup groups]];
+	srunner = [[OCSpecRunner alloc] initWithExampleGroups:[OCExampleGroup groups]];
 	self.srunner.delegate = specResultsController;
 	[self runSpecs:self];
 	

@@ -31,6 +31,7 @@
 
 #import "SpecRunnerSpecResultsController.h"
 
+#import "SpecRunnerAppDelegate.h"
 #import "SpecRunnerExampleResultCell.h"
 #import "SpecRunnerSpecResultDetailsController.h"
 
@@ -145,7 +146,7 @@ static NSString *kExampleResultCellIdentifier = @"kExampleResultCellIdentifier";
 	OCExampleResult *resultAtIndex = [groupAtIndex resultAtIndex:indexPath.row];
 	SpecRunnerExampleResultCell *cell = (SpecRunnerExampleResultCell *)[tableView dequeueReusableCellWithIdentifier:kExampleResultCellIdentifier];
 	if(cell == nil) {
-		cell = [[[SpecRunnerExampleResultCell alloc] initWithFrame:CGRectZero reuseIdentifier:kExampleResultCellIdentifier] autorelease];
+        cell = [[[SpecRunnerExampleResultCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kExampleResultCellIdentifier] autorelease];
 		cell.textLabel.font = [UIFont boldSystemFontOfSize:14.0];
 		cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 	}

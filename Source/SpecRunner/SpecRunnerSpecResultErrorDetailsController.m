@@ -136,7 +136,7 @@ enum  {
 	SpecRunnerLabelValueCell *cell;
 	cell = (SpecRunnerLabelValueCell *)[tableView dequeueReusableCellWithIdentifier:kResultErrorDetailsCellIdentifier];
 	if(cell == nil) {
-		cell = [[[SpecRunnerLabelValueCell alloc] initWithFrame:CGRectZero reuseIdentifier:kResultErrorDetailsCellIdentifier] autorelease];
+        cell = [[[SpecRunnerLabelValueCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kResultErrorDetailsCellIdentifier] autorelease];
 		cell.selectionStyle = UITableViewCellSelectionStyleNone;
 		cell.valueLabel.numberOfLines = 0; // unlimited
 	}
