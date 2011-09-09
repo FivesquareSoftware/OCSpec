@@ -13,7 +13,7 @@
 
 
 #import <SenTestingKit/SenTestingKit.h>
-#import "OCMock.h"
+
 
 @implementation ___FILEBASENAMEASIDENTIFIER___
 
