@@ -29,8 +29,6 @@
 		A4626A781419922D005544D6 /* SpecRunnerSpecResultErrorDetailsController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4626A681419922D005544D6 /* SpecRunnerSpecResultErrorDetailsController.m */; };
 		A4626A791419922D005544D6 /* SpecRunnerSpecResultsController.h in Headers */ = {isa = PBXBuildFile; fileRef = A4626A691419922D005544D6 /* SpecRunnerSpecResultsController.h */; };
 		A4626A7A1419922D005544D6 /* SpecRunnerSpecResultsController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4626A6A1419922D005544D6 /* SpecRunnerSpecResultsController.m */; };
-		A4626A7B1419922D005544D6 /* SpecRunnerStatusView.h in Headers */ = {isa = PBXBuildFile; fileRef = A4626A6B1419922D005544D6 /* SpecRunnerStatusView.h */; };
-		A4626A7C1419922D005544D6 /* SpecRunnerStatusView.m in Sources */ = {isa = PBXBuildFile; fileRef = A4626A6C1419922D005544D6 /* SpecRunnerStatusView.m */; };
 		AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AACBBE490F95108600F1A2B1 /* Foundation.framework */; };
 /* End PBXBuildFile section */
 
@@ -57,8 +55,6 @@
 		A4626A681419922D005544D6 /* SpecRunnerSpecResultErrorDetailsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpecRunnerSpecResultErrorDetailsController.m; sourceTree = "<group>"; };
 		A4626A691419922D005544D6 /* SpecRunnerSpecResultsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpecRunnerSpecResultsController.h; sourceTree = "<group>"; };
 		A4626A6A1419922D005544D6 /* SpecRunnerSpecResultsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpecRunnerSpecResultsController.m; sourceTree = "<group>"; };
-		A4626A6B1419922D005544D6 /* SpecRunnerStatusView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpecRunnerStatusView.h; sourceTree = "<group>"; };
-		A4626A6C1419922D005544D6 /* SpecRunnerStatusView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpecRunnerStatusView.m; sourceTree = "<group>"; };
 		AACBBE490F95108600F1A2B1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D2AAC07E0554694100DB518D /* libOCSpec.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libOCSpec.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -130,20 +126,18 @@
 			children = (
 				A4626A5D1419922D005544D6 /* SpecRunnerAppDelegate.h */,
 				A4626A5E1419922D005544D6 /* SpecRunnerAppDelegate.m */,
-				A4626A5F1419922D005544D6 /* SpecRunnerExampleResultCell.h */,
-				A4626A601419922D005544D6 /* SpecRunnerExampleResultCell.m */,
+				A4626A691419922D005544D6 /* SpecRunnerSpecResultsController.h */,
+				A4626A6A1419922D005544D6 /* SpecRunnerSpecResultsController.m */,
 				A4626A611419922D005544D6 /* SpecRunnerGroupResults.h */,
 				A4626A621419922D005544D6 /* SpecRunnerGroupResults.m */,
+				A4626A5F1419922D005544D6 /* SpecRunnerExampleResultCell.h */,
+				A4626A601419922D005544D6 /* SpecRunnerExampleResultCell.m */,
 				A4626A631419922D005544D6 /* SpecRunnerLabelValueCell.h */,
 				A4626A641419922D005544D6 /* SpecRunnerLabelValueCell.m */,
 				A4626A651419922D005544D6 /* SpecRunnerSpecResultDetailsController.h */,
 				A4626A661419922D005544D6 /* SpecRunnerSpecResultDetailsController.m */,
 				A4626A671419922D005544D6 /* SpecRunnerSpecResultErrorDetailsController.h */,
 				A4626A681419922D005544D6 /* SpecRunnerSpecResultErrorDetailsController.m */,
-				A4626A691419922D005544D6 /* SpecRunnerSpecResultsController.h */,
-				A4626A6A1419922D005544D6 /* SpecRunnerSpecResultsController.m */,
-				A4626A6B1419922D005544D6 /* SpecRunnerStatusView.h */,
-				A4626A6C1419922D005544D6 /* SpecRunnerStatusView.m */,
 			);
 			path = SpecRunner;
 			sourceTree = "<group>";
@@ -167,7 +161,6 @@
 				A4626A751419922D005544D6 /* SpecRunnerSpecResultDetailsController.h in Headers */,
 				A4626A771419922D005544D6 /* SpecRunnerSpecResultErrorDetailsController.h in Headers */,
 				A4626A791419922D005544D6 /* SpecRunnerSpecResultsController.h in Headers */,
-				A4626A7B1419922D005544D6 /* SpecRunnerStatusView.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -231,7 +224,6 @@
 				A4626A761419922D005544D6 /* SpecRunnerSpecResultDetailsController.m in Sources */,
 				A4626A781419922D005544D6 /* SpecRunnerSpecResultErrorDetailsController.m in Sources */,
 				A4626A7A1419922D005544D6 /* SpecRunnerSpecResultsController.m in Sources */,
-				A4626A7C1419922D005544D6 /* SpecRunnerStatusView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

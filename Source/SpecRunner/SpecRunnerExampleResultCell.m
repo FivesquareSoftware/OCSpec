@@ -30,7 +30,6 @@
 
 #import "SpecRunnerExampleResultCell.h"
 
-#import "SpecRunnerStatusView.h"
 
 #import <CoreGraphics/CoreGraphics.h>
 

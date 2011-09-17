@@ -206,7 +206,8 @@ static NSString *kExampleResultCellIdentifier = @"kExampleResultCellIdentifier";
 
 - (void) exampleDidFinish:(OCExampleResult *)result {
 	[self addResult:result];
-	[self.tableView reloadData];
+	[self.tableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
+//	[self.tableView reloadData];
 }
 
 - (void) errorRunningGroup:(NSDictionary *)errorInfo {
