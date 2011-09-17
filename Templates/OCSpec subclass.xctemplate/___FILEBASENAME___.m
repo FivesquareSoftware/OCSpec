@@ -23,8 +23,7 @@
 
 // ========================================================================== //
 
-#pragma mark -
-#pragma mark Setup and Teardown
+#pragma mark - Setup and Teardown
 
 
 - (void)beforeAll {
@@ -46,8 +45,7 @@
 
 // ========================================================================== //
 
-#pragma mark -
-#pragma mark Specs
+#pragma mark - Specs
 
 - (void)shouldFail {
 	STAssertTrue(NO,@"Unimplemented");
