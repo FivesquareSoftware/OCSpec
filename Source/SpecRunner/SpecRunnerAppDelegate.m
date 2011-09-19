@@ -41,41 +41,39 @@
 
 @implementation SpecRunnerAppDelegate
 
-@synthesize window;
-@synthesize specResultsController;
-@synthesize srunner;
+@synthesize window=window_;
+@synthesize navigationController=navigationController_;
+@synthesize activityIndicator=activityIndicator_;
+@synthesize specResultsController=specResultsController_;
+@synthesize srunner=srunner_;
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {	  
 	
-	window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-	
-	
-	specResultsController = [[SpecRunnerSpecResultsController alloc] initWithStyle:UITableViewStylePlain];
-	navigationController = [[UINavigationController alloc] initWithRootViewController:specResultsController];
-	navigationController.navigationBar.barStyle = UIBarStyleBlack;
+	window_ = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+
+	specResultsController_ = [[SpecRunnerSpecResultsController alloc] initWithStyle:UITableViewStylePlain];
+	navigationController_ = [[UINavigationController alloc] initWithRootViewController:specResultsController_];
+	navigationController_.navigationBar.barStyle = UIBarStyleBlack;
+
+	activityIndicator_ = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+	activityIndicator_.hidden = YES;
+	activityIndicator_.center = navigationController_.view.center;
+	[window_ addSubview:activityIndicator_];
 	
 	// Override point for customization after app launch	
-	[window addSubview:[navigationController view]];
+	[window_ addSubview:[navigationController_ view]];
 
-	specResultsController.view.alpha = 0.0;
-	window.backgroundColor = [UIColor blackColor];
+	specResultsController_.view.alpha = 0.0;
+	window_.backgroundColor = [UIColor blackColor];
 	
-	[window makeKeyAndVisible];
+	[window_ makeKeyAndVisible];
 
-	srunner = [[OCSpecRunner alloc] initWithExampleGroups:[OCExampleGroup groups]];
-	self.srunner.delegate = specResultsController;
+	srunner_ = [[OCSpecRunner alloc] initWithExampleGroups:[OCExampleGroup groups]];
+	self.srunner.delegate = specResultsController_;
 	[self runSpecs:self];
 	
 	return NO;
-}
-
-
-- (void) dealloc {
-	[specResultsController release];
-	[window release];
-	[srunner release];
-	[super dealloc];
 }
 
 - (void) runSpecs:(id)sender {
@@ -85,23 +83,23 @@
 }
 
 - (void) runSpecsInAnotherThread {
-	NSAutoreleasePool *pool = [NSAutoreleasePool new];
-	[self.srunner run];
-	[self performSelectorOnMainThread:@selector(stoppedSpecs) withObject:nil waitUntilDone:NO];
-	[pool release];
+	@autoreleasepool {
+		[self.srunner run];
+		[self performSelectorOnMainThread:@selector(stoppedSpecs) withObject:nil waitUntilDone:NO];
+	}
 }
 
 - (void) runningSpecs {
 	[UIView beginAnimations:nil context:nil];
-	[activityIndicator startAnimating];
-	specResultsController.view.alpha = 0.0;
+	[activityIndicator_ startAnimating];
+	specResultsController_.view.alpha = 0.0;
 	[UIView commitAnimations];
 }
 	
 - (void) stoppedSpecs {
 	[UIView beginAnimations:nil context:nil];
-	specResultsController.view.alpha = 1.0;
-	[activityIndicator stopAnimating];
+	specResultsController_.view.alpha = 1.0;
+	[activityIndicator_ stopAnimating];
 	[UIView commitAnimations];
 }
 

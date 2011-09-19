@@ -34,13 +34,10 @@
 
 
 @interface SpecRunnerExampleResultCell : UITableViewCell {
-	OCExampleResult *result;
-	
-	UIImage *statusImage;
 }
 
-@property (nonatomic, assign) OCExampleResult *result;
+@property (nonatomic, weak) OCExampleResult *result;
 
-@property (nonatomic, retain) UIImage *statusImage;
+@property (nonatomic, strong) UIImage *statusImage;
 
 @end

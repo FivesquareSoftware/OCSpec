@@ -35,27 +35,22 @@
 
 @implementation SpecRunnerGroupResults
 
-@synthesize group;
-@synthesize results;
+@synthesize group=group_;
+@synthesize results=results_;
 
 - (id) initWithGroup:(Class)aGroup {
 	self = [super init];
 	if (self != nil) {
-		self.group = aGroup;
-		results = [NSMutableArray new];
+		group_ = aGroup;
+		results_ = [NSMutableArray new];
 	}
 	return self;
 }
 
 + (id) withGroup:(Class)aGroup {
-	return [[[SpecRunnerGroupResults alloc] initWithGroup:aGroup] autorelease];
+	return [[SpecRunnerGroupResults alloc] initWithGroup:aGroup];
 }
 
-- (void) dealloc {
-	[group release];
-	[results release];
-	[super dealloc];
-}
 
 - (NSUInteger) hash {
 	return [self.group hash];

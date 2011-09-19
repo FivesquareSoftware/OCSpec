@@ -35,16 +35,13 @@
 @class OCSpecRunner;
 
 @interface SpecRunnerAppDelegate : NSObject <UIApplicationDelegate> {
-	UIWindow *window;
-	UINavigationController *navigationController;
-	UIActivityIndicatorView *activityIndicator;
-	SpecRunnerSpecResultsController *specResultsController;
-	OCSpecRunner *srunner;
 }
 
-@property (nonatomic, retain) UIWindow *window;
-@property (nonatomic, retain) SpecRunnerSpecResultsController *specResultsController;
-@property (nonatomic, retain) OCSpecRunner *srunner;
+@property (nonatomic, strong) UIWindow *window;
+@property (nonatomic, strong) UINavigationController *navigationController;
+@property (nonatomic, strong) UIActivityIndicatorView *activityIndicator;
+@property (nonatomic, strong) SpecRunnerSpecResultsController *specResultsController;
+@property (nonatomic, strong) OCSpecRunner *srunner;
 
 
 - (void) runSpecs:(id)sender;

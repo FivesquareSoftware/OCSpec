@@ -46,32 +46,19 @@ static NSString *kExampleResultCellIdentifier = @"kExampleResultCellIdentifier";
 
 // ========================================================================== //
 
-#pragma mark -
-#pragma mark Properties
+#pragma mark - Properties
 
 
-@synthesize tableData;
-@synthesize headerView;
-@synthesize headerLabel;
-
-
-// ========================================================================== //
-
-#pragma mark -
-#pragma mark Object
-
-- (void) dealloc {
-	[tableData release];
-	[super dealloc];
-}
+@synthesize tableData=tableData_;
+@synthesize headerView=headerView_;
+@synthesize headerLabel=headerLabel_;
 
 
 
 
 // ========================================================================== //
 
-#pragma mark -
-#pragma mark View Controller
+#pragma mark - View Controller
 
 - (void) viewDidLoad {	  
 	[super viewDidLoad];
@@ -80,15 +67,14 @@ static NSString *kExampleResultCellIdentifier = @"kExampleResultCellIdentifier";
 	
 	UIBarButtonItem *runButton = [[UIBarButtonItem alloc] initWithTitle:@"Run" style:UIBarButtonItemStyleBordered target:[[UIApplication sharedApplication] delegate] action:@selector(runSpecs:)];
 	self.navigationItem.rightBarButtonItem = runButton;
-	[runButton release];
 	
-	headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320.f, 25.f)];
-	headerView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-	headerView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:.50];
+	headerView_ = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320.f, 25.f)];
+	headerView_.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+	headerView_.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:.50];
 	
-	headerLabel = [[UILabel alloc] initWithFrame:CGRectMake(12.f, 0, 302.f, 25.f)];
-	headerLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-	headerLabel.textColor = [UIColor whiteColor];
+	headerLabel_ = [[UILabel alloc] initWithFrame:CGRectMake(12.f, 0, 302.f, 25.f)];
+	headerLabel_.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+	headerLabel_.textColor = [UIColor whiteColor];
 	
 	self.tableView.dataSource = self;
 	self.tableView.delegate = self;
@@ -126,8 +112,7 @@ static NSString *kExampleResultCellIdentifier = @"kExampleResultCellIdentifier";
 
 // ========================================================================== //
 
-#pragma mark -
-#pragma mark Table View Data Source
+#pragma mark - Table View Data Source
 
 - (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView {
 	return [self hasResults] ? [self.tableData count] : 1;
@@ -146,7 +131,7 @@ static NSString *kExampleResultCellIdentifier = @"kExampleResultCellIdentifier";
 	OCExampleResult *resultAtIndex = [groupAtIndex resultAtIndex:indexPath.row];
 	SpecRunnerExampleResultCell *cell = (SpecRunnerExampleResultCell *)[tableView dequeueReusableCellWithIdentifier:kExampleResultCellIdentifier];
 	if(cell == nil) {
-        cell = [[[SpecRunnerExampleResultCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kExampleResultCellIdentifier] autorelease];
+        cell = [[SpecRunnerExampleResultCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kExampleResultCellIdentifier];
 		cell.textLabel.font = [UIFont boldSystemFontOfSize:14.0];
 		cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 	}
@@ -170,12 +155,11 @@ static NSString *kExampleResultCellIdentifier = @"kExampleResultCellIdentifier";
 	SpecRunnerSpecResultDetailsController *detailViewController = [[SpecRunnerSpecResultDetailsController alloc] initWithStyle:UITableViewStylePlain];
 	detailViewController.result = resultAtIndex;
 	[self.navigationController pushViewController:detailViewController animated:YES];
-	[detailViewController release];
 }
 
 - (UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
 	if([self hasResults]) {
-		UIView *hview = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 320.0, 22.0)] autorelease];
+		UIView *hview = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320.0, 22.0)];
 		hview.autoresizingMask = UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleWidth;
 		hview.backgroundColor = [UIColor blackColor];
 		hview.alpha = 0.5;
@@ -188,7 +172,6 @@ static NSString *kExampleResultCellIdentifier = @"kExampleResultCellIdentifier";
 		aLabel.textColor = [UIColor whiteColor]; 
 		aLabel.text = [(SpecRunnerGroupResults *)[self.tableData objectAtIndex:section] description];
 		[hview addSubview:aLabel];
-		[aLabel release];
 		return hview;
 	}
 	return nil;
@@ -200,8 +183,7 @@ static NSString *kExampleResultCellIdentifier = @"kExampleResultCellIdentifier";
 
 // ========================================================================== //
 
-#pragma mark -
-#pragma mark Spec Runner Delegate
+#pragma mark - Spec Runner Delegate
 
 
 - (void) exampleDidFinish:(OCExampleResult *)result {
@@ -223,17 +205,15 @@ static NSString *kExampleResultCellIdentifier = @"kExampleResultCellIdentifier";
 						  cancelButtonTitle:@"OK" 
 						  otherButtonTitles:nil];
 	[alert show];
-	[alert release];
 }
 	 
 
 // ========================================================================== //
 
-#pragma mark -
-#pragma mark Helpers
+#pragma mark - Helpers
 
 - (void) resetResultsData {
-	self.tableData = [[NSMutableArray new] autorelease];
+	self.tableData = [NSMutableArray new];
 }
 
 - (BOOL) hasResults {

@@ -48,16 +48,16 @@ enum  {
 
 @implementation SpecRunnerSpecResultDetailsController
 
-// Properties  ============================================================== //
+// ========================================================================== //
 
-#pragma mark -
-#pragma mark Properties
+#pragma mark - Properties
 
-@synthesize result;
+
+@synthesize result=result_;
 
 - (void) setResult:(OCExampleResult *)newResult {
-	if(result != newResult){
-		result = newResult;
+	if(result_ != newResult){
+		result_ = newResult;
 		[self.tableView reloadData];
 	}
 }
@@ -65,21 +65,8 @@ enum  {
 
 // ========================================================================== //
 
-#pragma mark -
-#pragma mark Object
+#pragma mark - View Controller
 
-
-
-- (void) dealloc {
-	[super dealloc];
-}
-
-
-
-// ========================================================================== //
-
-#pragma mark -
-#pragma mark View Controller
 
 - (void) viewDidLoad {	  
 	[super viewDidLoad];
@@ -120,8 +107,7 @@ enum  {
 
 // ========================================================================== //
 
-#pragma mark -
-#pragma mark Table View Data Source
+#pragma mark - Table View 
 
 - (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView {
 	return 1;
@@ -134,7 +120,7 @@ enum  {
 - (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 	SpecRunnerLabelValueCell *cell = (SpecRunnerLabelValueCell *)[tableView dequeueReusableCellWithIdentifier:kResultDetailsCellIdentifier];
 	if(cell == nil) {
-		cell = [[[SpecRunnerLabelValueCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kResultDetailsCellIdentifier] autorelease];
+		cell = [[SpecRunnerLabelValueCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kResultDetailsCellIdentifier];
 		cell.selectionStyle = UITableViewCellSelectionStyleNone;
 	}
 	switch (indexPath.row) {
@@ -180,13 +166,6 @@ enum  {
 	return NO;
 }
 
-
-
-// ========================================================================== //
-
-#pragma mark -
-#pragma mark Table View Delegate
-
 - (NSIndexPath *) tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	if(indexPath.row == kSpecRunnerSpecResultDetailsControllerSectionExampleError) {
 		return indexPath;
@@ -199,7 +178,6 @@ enum  {
 		SpecRunnerSpecResultErrorDetailsController *errorDetailsController = [[SpecRunnerSpecResultErrorDetailsController alloc] initWithStyle:UITableViewStylePlain];
 		errorDetailsController.error = self.result.error;
 		[self.navigationController pushViewController:errorDetailsController animated:YES];
-		[errorDetailsController release];
 	}
 }
 

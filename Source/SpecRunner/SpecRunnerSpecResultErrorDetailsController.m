@@ -48,38 +48,23 @@ enum  {
 
 // ========================================================================== //
 
-#pragma mark -
-#pragma mark Properties
+#pragma mark - Properties
 
 
-@synthesize error;
+@synthesize error=error_;
 
 - (void) setError:(NSException *)newError {
-	if(error != newError) {
-		[error release];
-		error = [newError retain];
+	if(error_ != newError) {
+		error_ = newError;
 		[self.tableView reloadData];
 	}
 }
 
 
-// ========================================================================== //
-
-#pragma mark -
-#pragma mark Object
-
-- (void) dealloc {
-	[error release];
-	
-	[super dealloc];
-}
-
-
 
 // ========================================================================== //
 
-#pragma mark -
-#pragma mark View Controller
+#pragma mark - View Controller
 
 - (void) viewDidLoad {	  
 	[super viewDidLoad];
@@ -119,8 +104,7 @@ enum  {
 
 // ========================================================================== //
 
-#pragma mark -
-#pragma mark Table View Data Source
+#pragma mark - Table View
 
 
 
@@ -136,7 +120,7 @@ enum  {
 	SpecRunnerLabelValueCell *cell;
 	cell = (SpecRunnerLabelValueCell *)[tableView dequeueReusableCellWithIdentifier:kResultErrorDetailsCellIdentifier];
 	if(cell == nil) {
-        cell = [[[SpecRunnerLabelValueCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kResultErrorDetailsCellIdentifier] autorelease];
+        cell = [[SpecRunnerLabelValueCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kResultErrorDetailsCellIdentifier];
 		cell.selectionStyle = UITableViewCellSelectionStyleNone;
 		cell.valueLabel.numberOfLines = 0; // unlimited
 	}

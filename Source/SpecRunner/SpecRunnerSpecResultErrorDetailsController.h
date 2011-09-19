@@ -32,9 +32,8 @@
 
 
 @interface SpecRunnerSpecResultErrorDetailsController : UITableViewController {
-	NSException *error;
 }
 
-@property (nonatomic, retain) NSException *error;
+@property (nonatomic, strong) NSException *error;
 
 @end

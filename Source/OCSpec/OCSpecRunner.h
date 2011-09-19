@@ -43,14 +43,10 @@ extern NSString *kOCErrorInfoKeyMessage;
 
 
 @interface OCSpecRunner : NSObject {
-    NSArray *exampleGroups;
-    id<OCSpecRunnerDelegate> delegate;
-    unsigned long long startTime;
-    unsigned long long stopTime;
 }
 
-@property (nonatomic, retain) NSArray *exampleGroups;
-@property (nonatomic, assign) id<OCSpecRunnerDelegate> delegate;
+@property (nonatomic, strong) NSArray *exampleGroups;
+@property (nonatomic, weak) id<OCSpecRunnerDelegate> delegate;
 @property (nonatomic, assign) unsigned long long startTime;
 @property (nonatomic, assign) unsigned long long stopTime;
 

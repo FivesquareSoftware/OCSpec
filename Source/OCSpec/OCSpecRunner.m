@@ -35,6 +35,7 @@
 
 #import <Foundation/NSObjCRuntime.h>
 #import <objc/runtime.h>
+#import <objc/message.h>
 
 #include <sys/time.h>
 #include "limits.h"
@@ -46,9 +47,9 @@ NSString *kOCErrorInfoKeyMessage = @"kOCErrorInfoKeyMessage";
 
 @implementation OCSpecRunner
 
-@synthesize exampleGroups;
-@synthesize delegate;
-@synthesize startTime, stopTime;
+@synthesize exampleGroups=exampleGroups_;
+@synthesize delegate=delegate_;
+@synthesize startTime=startTime_, stopTime=stopTime_;
 
 
 - (id) initWithExampleGroups:(NSArray *)someExampleGroups {
@@ -59,20 +60,16 @@ NSString *kOCErrorInfoKeyMessage = @"kOCErrorInfoKeyMessage";
     return self;
 }
 
-- (void) dealloc {
-    [exampleGroups release];
-    [super dealloc];
-}
 
 
 - (NSMutableArray *) run {
-    NSMutableArray *results = [[NSMutableArray new] autorelease];
+    NSMutableArray *results = [NSMutableArray new];
     OCExampleResult *result;
     for (Class group in self.exampleGroups) {
         NSLog(@"Running example group: %@",group);
         id groupInstance;
         @try {
-            groupInstance = class_createInstance(group, 0);
+            groupInstance = [group new];
             if([groupInstance respondsToSelector:@selector(beforeAll)]) {
                 [groupInstance performSelector:@selector(beforeAll)];
             }
@@ -90,7 +87,8 @@ NSString *kOCErrorInfoKeyMessage = @"kOCErrorInfoKeyMessage";
                     @try {
                         result = [[OCExampleResult alloc] initWithExampleName:mString inGroup:group];
                         [self startBenchmark];
-                        [groupInstance performSelector:mSel];
+//                        [groupInstance performSelector:mSel];
+						objc_msgSend(groupInstance,mSel);
                         result.success = YES;
                     }
                     @catch (NSException * e) {
@@ -107,8 +105,7 @@ NSString *kOCErrorInfoKeyMessage = @"kOCErrorInfoKeyMessage";
                             [groupInstance performSelector:@selector(afterEach)];
                         }
                         [results addObject:result];
-                        [result release];
-                        if(self.delegate && [delegate respondsToSelector:@selector(exampleDidFinish:)]) {
+                        if(delegate_ && [delegate_ respondsToSelector:@selector(exampleDidFinish:)]) {
                             [self.delegate exampleDidFinish:result];
                         }
                     }
@@ -122,7 +119,9 @@ NSString *kOCErrorInfoKeyMessage = @"kOCErrorInfoKeyMessage";
             NSLog(@"exception: %@",[e name]);
             NSLog(@"reason: %@",[e reason]);
             NSLog(@"stack: %@",[e callStackSymbols]);
-            [self.delegate errorRunningGroup:[NSDictionary dictionaryWithObjectsAndKeys:group,kOCErrorInfoKeyGroup,[e reason],kOCErrorInfoKeyMessage,nil]];
+			if(delegate_ && [delegate_ respondsToSelector:@selector(exampleDidFinish:)]) {
+				[self.delegate errorRunningGroup:[NSDictionary dictionaryWithObjectsAndKeys:group,kOCErrorInfoKeyGroup,[e reason],kOCErrorInfoKeyMessage,nil]];
+			}
         }
         @finally {
             if(groupInstance) {
@@ -135,7 +134,7 @@ NSString *kOCErrorInfoKeyMessage = @"kOCErrorInfoKeyMessage";
                         [self.delegate errorRunningGroup:[NSDictionary dictionaryWithObjectsAndKeys:group,kOCErrorInfoKeyGroup,[e reason],kOCErrorInfoKeyMessage,nil]];
                     }
                 }
-                [groupInstance release];
+                groupInstance = nil;
             }
         }
     }
@@ -152,8 +151,8 @@ NSString *kOCErrorInfoKeyMessage = @"kOCErrorInfoKeyMessage";
 
 // You can only call this once for each invocation of start/stopBenchmark
 - (long) elapsed {
-    NSAssert(startTime > 0, @"Start time not set");
-    NSAssert(stopTime > 0, @"Stop time not set");    
+    NSAssert(startTime_ > 0, @"Start time not set");
+    NSAssert(stopTime_ > 0, @"Stop time not set");    
     long elapsed =  self.stopTime-self.startTime;
     NSLog(@"elapsed: %ld",elapsed);
     self.startTime = -1;

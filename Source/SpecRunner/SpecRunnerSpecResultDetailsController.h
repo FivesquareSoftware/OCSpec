@@ -34,9 +34,8 @@
 @class SpecRunnerSpecResultErrorDetailsController;
 
 @interface SpecRunnerSpecResultDetailsController : UITableViewController {
-	OCExampleResult *result;
 }
 
-@property (nonatomic, assign) OCExampleResult *result;
+@property (nonatomic, weak) OCExampleResult *result;
 
 @end

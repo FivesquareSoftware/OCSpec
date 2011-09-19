@@ -46,10 +46,9 @@
 @end
 
 @interface OCExampleGroup : NSObject <OCExampleGroup> {
-	SpecHelper *specHelper;
 }
 
-@property (nonatomic, retain) SpecHelper *specHelper;
+@property (nonatomic, strong) SpecHelper *specHelper;
 
 + (NSArray *) groups;
 

@@ -34,11 +34,11 @@
 
 @implementation OCExampleResult
 
-@synthesize group;
-@synthesize exampleName;
-@synthesize success;
-@synthesize elapsed;
-@synthesize error;
+@synthesize group=group_;
+@synthesize exampleName=exampleName_;
+@synthesize success=success_;
+@synthesize elapsed=elapsed_;
+@synthesize error=error_;
 
 - (id) initWithExampleName:(NSString *)anExampleName inGroup:(Class)aGroup {
     self = [super init];
@@ -49,12 +49,6 @@
     return self;
 }
 
-- (void) dealloc {
-    [group release];
-    [exampleName release];
-    [error release];
-    [super dealloc];
-}
 
 
 @end

@@ -42,32 +42,24 @@
 @implementation SpecRunnerExampleResultCell
 
 
-@synthesize result;
-@synthesize statusImage;
+@synthesize result=result_;
+@synthesize statusImage=statusImage_;
 
 - (void) setResult:(OCExampleResult *)newResult {
-	if(result != newResult){
-		result = newResult;
-		self.textLabel.text = result.exampleName;
-		
-		[statusImage release]; statusImage = nil;
-		
+	if(result_ != newResult){
+		result_ = newResult;
+		self.textLabel.text = result_.exampleName;
+		 statusImage_ = nil;
 		self.imageView.image = self.statusImage;
 	}
 }
 
 - (UIImage *) statusImage {
-	if(statusImage == nil) {
-		statusImage = [[self statusImageForResult:self.result] retain];
+	if(statusImage_ == nil) {
+		statusImage_ = [self statusImageForResult:self.result];
 	}
-	return statusImage;
+	return statusImage_;
 }
-
-- (void) dealloc {
-	[statusImage release]; statusImage = nil;
-	[super dealloc];
-}
-
 
 - (UIImage *) statusImageForResult:(OCExampleResult *)aResult {
 	if([NSThread currentThread] != [NSThread mainThread]) {
@@ -81,7 +73,7 @@
 	CGPoint imageViewCenter = CGPointMake(CGRectGetMidX(imageViewRect), CGRectGetMidY(imageViewRect));
 	CGRect imageRect = CGRectMake(imageViewCenter.x - 6.f, imageViewCenter.y - 6.f, 12.f, 12.f);
 
-	CGContextSetFillColorWithColor(context, result.success ? [UIColor greenColor].CGColor : [UIColor redColor].CGColor);
+	CGContextSetFillColorWithColor(context, result_.success ? [UIColor greenColor].CGColor : [UIColor redColor].CGColor);
 	CGContextFillEllipseInRect(context, imageRect);
 
 	UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
@@ -90,7 +82,5 @@
 	
 	return image;
 }
-
-
 
 @end

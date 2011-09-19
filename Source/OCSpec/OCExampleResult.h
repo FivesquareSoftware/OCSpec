@@ -33,18 +33,13 @@
 
 
 @interface OCExampleResult : NSObject {
-    Class group;
-    NSString *exampleName;
-    BOOL success;
-    long elapsed;
-    NSException *error;
 }
 
-@property (nonatomic, retain) Class group;
-@property (nonatomic, retain) NSString *exampleName;
+@property (nonatomic, assign) Class group;
+@property (nonatomic, strong) NSString *exampleName;
 @property (nonatomic, assign) BOOL success;
 @property (nonatomic, assign) long elapsed;
-@property (nonatomic, retain) NSException *error;
+@property (nonatomic, strong) NSException *error;
 
 - (id) initWithExampleName:(NSString *)anExampleName inGroup:(Class)aGroup;
 

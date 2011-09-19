@@ -39,21 +39,18 @@ static NSMutableArray *subclasses = nil;
 
 @implementation OCExampleGroup
 
-@dynamic specHelper;
+@synthesize specHelper=specHelper_;
+
 - (SpecHelper *) specHelper {
-	if(specHelper == nil) {
+	if(specHelper_ == nil) {
 		Class klass;
 		if( (klass = NSClassFromString(@"SpecHelper")) ) {
-			specHelper = [[klass alloc] init];
+			specHelper_ = [klass new];
 		}
 	}
-	return specHelper;
+	return specHelper_;
 }
 
-- (void) dealloc {
-	[specHelper release]; specHelper = nil;
-	[super dealloc];
-}
 
 
 + (NSArray *) groups {
@@ -66,7 +63,7 @@ static NSMutableArray *subclasses = nil;
         numClasses = objc_getClassList(NULL, 0);
         
         if (numClasses > 0 ) {
-            classes = malloc(sizeof(Class) * numClasses);
+            classes = (Class *)malloc((sizeof(Class)) * numClasses);
             numClasses = objc_getClassList(classes, numClasses);
             for (int i = 0; i < numClasses; i++) {
                 Class klass = classes[i];

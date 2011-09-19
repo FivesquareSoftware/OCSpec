@@ -34,12 +34,10 @@
 @class OCExampleGroup, OCExampleResult;
 
 @interface SpecRunnerGroupResults : NSObject {
-	Class group;
-	NSMutableArray *results;
 }
 
-@property (nonatomic, retain) Class group;
-@property (nonatomic, retain) NSMutableArray *results;
+@property (nonatomic, assign) Class group;
+@property (nonatomic, strong) NSMutableArray *results;
 
 
 - (id) initWithGroup:(Class)aGroup;

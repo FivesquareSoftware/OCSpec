@@ -32,12 +32,10 @@
 
 
 @interface SpecRunnerLabelValueCell : UITableViewCell {
-	UILabel *keyLabel;
-	UILabel *valueLabel;	
 }
 
-@property (nonatomic, retain) UILabel *keyLabel;
-@property (nonatomic, retain) UILabel *valueLabel;
+@property (nonatomic, strong) UILabel *keyLabel;
+@property (nonatomic, strong) UILabel *valueLabel;
 
 
 @end
