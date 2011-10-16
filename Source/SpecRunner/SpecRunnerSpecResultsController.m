@@ -41,6 +41,12 @@
 
 static NSString *kExampleResultCellIdentifier = @"kExampleResultCellIdentifier";
 
+
+@interface SpecRunnerSpecResultsController()
+- (void) scrollToLastResult;
+@end
+
+
 @implementation SpecRunnerSpecResultsController
 
 
@@ -132,11 +138,8 @@ static NSString *kExampleResultCellIdentifier = @"kExampleResultCellIdentifier";
 	SpecRunnerExampleResultCell *cell = (SpecRunnerExampleResultCell *)[tableView dequeueReusableCellWithIdentifier:kExampleResultCellIdentifier];
 	if(cell == nil) {
         cell = [[SpecRunnerExampleResultCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kExampleResultCellIdentifier];
-		cell.textLabel.font = [UIFont boldSystemFontOfSize:14.0];
-		cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 	}
 	cell.result = resultAtIndex;
-	cell.showsReorderControl = NO;
 	return cell;
 }
 
@@ -189,7 +192,16 @@ static NSString *kExampleResultCellIdentifier = @"kExampleResultCellIdentifier";
 - (void) exampleDidFinish:(OCExampleResult *)result {
 	[self addResult:result];
 	[self.tableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
-//	[self.tableView reloadData];
+	[self performSelectorOnMainThread:@selector(scrollToLastResult) withObject:nil waitUntilDone:NO];
+}
+	 
+- (void) scrollToLastResult {
+	NSUInteger lastSection = [self.tableData count]-1;
+	SpecRunnerGroupResults *lastGroup = (SpecRunnerGroupResults *)[self.tableData objectAtIndex:lastSection];
+	NSUInteger lastRow = [lastGroup numberOfResults]-1;
+
+	NSIndexPath *indexPath = [NSIndexPath indexPathForRow:lastRow inSection:lastSection];
+	[self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
 }
 
 - (void) errorRunningGroup:(NSDictionary *)errorInfo {

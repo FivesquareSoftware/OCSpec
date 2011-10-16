@@ -61,10 +61,17 @@
 	return statusImage_;
 }
 
+- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
+    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+    if (self) {
+		self.textLabel.font = [UIFont boldSystemFontOfSize:12.0];
+		self.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+		self.showsReorderControl = NO;
+    }
+    return self;
+}
+
 - (UIImage *) statusImageForResult:(OCExampleResult *)aResult {
-	if([NSThread currentThread] != [NSThread mainThread]) {
-		[self performSelectorOnMainThread:_cmd withObject:aResult waitUntilDone:YES];
-	}
 	
 	CGRect imageViewRect = CGRectMake(0, 0, self.frame.size.height, self.frame.size.height);
 	UIGraphicsBeginImageContext(imageViewRect.size);

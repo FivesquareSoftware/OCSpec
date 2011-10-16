@@ -43,6 +43,7 @@
 
 @synthesize window=window_;
 @synthesize navigationController=navigationController_;
+@synthesize overlayView=overlayView_;
 @synthesize activityIndicator=activityIndicator_;
 @synthesize specResultsController=specResultsController_;
 @synthesize srunner=srunner_;
@@ -56,15 +57,18 @@
 	navigationController_ = [[UINavigationController alloc] initWithRootViewController:specResultsController_];
 	navigationController_.navigationBar.barStyle = UIBarStyleBlack;
 
+	overlayView_ = [[UIView alloc] initWithFrame:window_.frame];
+	overlayView_.backgroundColor = [UIColor blackColor];
+	overlayView_.alpha = 0.f;
+	[window_ addSubview:overlayView_];
+	
 	activityIndicator_ = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
 	activityIndicator_.hidden = YES;
 	activityIndicator_.center = navigationController_.view.center;
 	[window_ addSubview:activityIndicator_];
 	
-	// Override point for customization after app launch	
-	[window_ addSubview:[navigationController_ view]];
+	[window_ insertSubview:navigationController_.view belowSubview:overlayView_];
 
-	specResultsController_.view.alpha = 0.0;
 	window_.backgroundColor = [UIColor blackColor];
 	
 	[window_ makeKeyAndVisible];
@@ -92,13 +96,13 @@
 - (void) runningSpecs {
 	[UIView beginAnimations:nil context:nil];
 	[activityIndicator_ startAnimating];
-	specResultsController_.view.alpha = 0.0;
+	overlayView_.alpha = 0.45f;
 	[UIView commitAnimations];
 }
 	
 - (void) stoppedSpecs {
 	[UIView beginAnimations:nil context:nil];
-	specResultsController_.view.alpha = 1.0;
+	overlayView_.alpha = 0.f;
 	[activityIndicator_ stopAnimating];
 	[UIView commitAnimations];
 }
