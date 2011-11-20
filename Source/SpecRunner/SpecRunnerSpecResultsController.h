@@ -45,7 +45,6 @@
 
 - (void) resetResultsData;
 - (BOOL) hasResults;
-- (SpecRunnerGroupResults *) resultsForGroup:(Class)aGroup;
-- (void) addResult:(OCExampleResult *)result;
+
 
 @end

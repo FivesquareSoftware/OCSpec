@@ -41,6 +41,19 @@
 
 static NSString *kExampleResultCellIdentifier = @"kExampleResultCellIdentifier";
 
+<<<<<<< HEAD
+=======
+
+@interface SpecRunnerSpecResultsController()
+- (SpecRunnerGroupResults *) resultsForGroup:(Class)aGroup index:(NSUInteger *)index;
+- (void) addResult:(OCExampleResult *)result;
+@end
+
+
+@implementation SpecRunnerSpecResultsController
+
+// ========================================================================== //
+>>>>>>> merge
 
 @interface SpecRunnerSpecResultsController()
 - (void) scrollToLastResult;
@@ -121,7 +134,7 @@ static NSString *kExampleResultCellIdentifier = @"kExampleResultCellIdentifier";
 #pragma mark - Table View Data Source
 
 - (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView {
-	return [self hasResults] ? [self.tableData count] : 1;
+	return [self.tableData count];
 }
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -191,6 +204,7 @@ static NSString *kExampleResultCellIdentifier = @"kExampleResultCellIdentifier";
 
 - (void) exampleDidFinish:(OCExampleResult *)result {
 	[self addResult:result];
+<<<<<<< HEAD
 	[self.tableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
 	[self performSelectorOnMainThread:@selector(scrollToLastResult) withObject:nil waitUntilDone:NO];
 }
@@ -202,8 +216,10 @@ static NSString *kExampleResultCellIdentifier = @"kExampleResultCellIdentifier";
 
 	NSIndexPath *indexPath = [NSIndexPath indexPathForRow:lastRow inSection:lastSection];
 	[self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+=======
+>>>>>>> merge
 }
-
+	 
 - (void) errorRunningGroup:(NSDictionary *)errorInfo {
 	Class group = [errorInfo objectForKey:kOCErrorInfoKeyGroup];
 //	  NSString *msg = [errorInfo objectForKey:kOCErrorInfoKeyMessage];
@@ -232,19 +248,48 @@ static NSString *kExampleResultCellIdentifier = @"kExampleResultCellIdentifier";
 	return [self.tableData count] > 0;
 }
 
-- (SpecRunnerGroupResults *) resultsForGroup:(Class)aGroup {
-	SpecRunnerGroupResults *foundGroup = [SpecRunnerGroupResults withGroup:aGroup];
-	NSUInteger idx = [self.tableData indexOfObject:foundGroup];
-	if(idx == NSNotFound) {
-		[self.tableData insertObject:foundGroup atIndex:[self.tableData count]];
-	} else {
-		foundGroup = [self.tableData objectAtIndex:idx];
+- (SpecRunnerGroupResults *) resultsForGroup:(Class)aGroup index:(NSUInteger *)index {
+	__block SpecRunnerGroupResults *foundGroup = nil;	
+	[self.tableData enumerateObjectsUsingBlock:^(SpecRunnerGroupResults *results, NSUInteger idx, BOOL *stop) {
+		if (results.group == aGroup) {
+			foundGroup = results;
+			if (index) {
+				*index = idx;
+			}
+			*stop = YES;
+		}
+	}];
+	if (nil == foundGroup) {
+		NSUInteger idx = [self.tableData count];
+		if (index) {
+			*index = idx;
+		}
+		foundGroup = [SpecRunnerGroupResults withGroup:aGroup];
+		[self.tableData addObject:foundGroup];
+		dispatch_sync(dispatch_get_main_queue(), ^{
+			[self.tableView beginUpdates];
+			[self.tableView insertSections:[NSIndexSet indexSetWithIndex:idx] withRowAnimation:UITableViewRowAnimationNone];
+			[self.tableView endUpdates];
+		});
+		
 	}
 	return foundGroup;
 }
 
 - (void) addResult:(OCExampleResult *)result {	  
-	[[self resultsForGroup:result.group] addResult:result];
+	NSUInteger section;
+	SpecRunnerGroupResults *groupResults = [self resultsForGroup:result.group index:&section];
+	NSUInteger row = [groupResults numberOfResults];
+	[groupResults addResult:result];
+	
+	NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:section];
+	dispatch_sync(dispatch_get_main_queue(), ^{
+		[self.tableView beginUpdates];
+		[self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationBottom];
+		[self.tableView endUpdates];
+		[self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+	});
+
 }
 
 @end
