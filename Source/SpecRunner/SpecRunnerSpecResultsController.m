@@ -41,22 +41,10 @@
 
 static NSString *kExampleResultCellIdentifier = @"kExampleResultCellIdentifier";
 
-<<<<<<< HEAD
-=======
 
 @interface SpecRunnerSpecResultsController()
 - (SpecRunnerGroupResults *) resultsForGroup:(Class)aGroup index:(NSUInteger *)index;
 - (void) addResult:(OCExampleResult *)result;
-@end
-
-
-@implementation SpecRunnerSpecResultsController
-
-// ========================================================================== //
->>>>>>> merge
-
-@interface SpecRunnerSpecResultsController()
-- (void) scrollToLastResult;
 @end
 
 
@@ -204,20 +192,6 @@ static NSString *kExampleResultCellIdentifier = @"kExampleResultCellIdentifier";
 
 - (void) exampleDidFinish:(OCExampleResult *)result {
 	[self addResult:result];
-<<<<<<< HEAD
-	[self.tableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
-	[self performSelectorOnMainThread:@selector(scrollToLastResult) withObject:nil waitUntilDone:NO];
-}
-	 
-- (void) scrollToLastResult {
-	NSUInteger lastSection = [self.tableData count]-1;
-	SpecRunnerGroupResults *lastGroup = (SpecRunnerGroupResults *)[self.tableData objectAtIndex:lastSection];
-	NSUInteger lastRow = [lastGroup numberOfResults]-1;
-
-	NSIndexPath *indexPath = [NSIndexPath indexPathForRow:lastRow inSection:lastSection];
-	[self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
-=======
->>>>>>> merge
 }
 	 
 - (void) errorRunningGroup:(NSDictionary *)errorInfo {
