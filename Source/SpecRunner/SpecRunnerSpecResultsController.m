@@ -216,6 +216,7 @@ static NSString *kExampleResultCellIdentifier = @"kExampleResultCellIdentifier";
 
 - (void) resetResultsData {
 	self.tableData = [NSMutableArray new];
+	[self.tableView reloadData];
 }
 
 - (BOOL) hasResults {
