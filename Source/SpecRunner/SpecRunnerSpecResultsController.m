@@ -216,6 +216,7 @@ static NSString *kExampleResultCellIdentifier = @"kExampleResultCellIdentifier";
 
 - (void) resetResultsData {
 	self.tableData = [NSMutableArray new];
+	[self.tableView reloadData];
 }
 
 - (BOOL) hasResults {
@@ -240,24 +241,24 @@ static NSString *kExampleResultCellIdentifier = @"kExampleResultCellIdentifier";
 		}
 		foundGroup = [SpecRunnerGroupResults withGroup:aGroup];
 		[self.tableData addObject:foundGroup];
-		dispatch_sync(dispatch_get_main_queue(), ^{
-			[self.tableView beginUpdates];
-			[self.tableView insertSections:[NSIndexSet indexSetWithIndex:idx] withRowAnimation:UITableViewRowAnimationNone];
-			[self.tableView endUpdates];
-		});
+
+		[self.tableView beginUpdates];
+		[self.tableView insertSections:[NSIndexSet indexSetWithIndex:idx] withRowAnimation:UITableViewRowAnimationNone];
+		[self.tableView endUpdates];
+
 		
 	}
 	return foundGroup;
 }
 
 - (void) addResult:(OCExampleResult *)result {	  
-	NSUInteger section;
-	SpecRunnerGroupResults *groupResults = [self resultsForGroup:result.group index:&section];
-	NSUInteger row = [groupResults numberOfResults];
-	[groupResults addResult:result];
-	
-	NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:section];
 	dispatch_sync(dispatch_get_main_queue(), ^{
+		NSUInteger section;
+		SpecRunnerGroupResults *groupResults = [self resultsForGroup:result.group index:&section];
+		NSUInteger row = [groupResults numberOfResults];
+		[groupResults addResult:result];
+		
+		NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:section];
 		[self.tableView beginUpdates];
 		[self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationBottom];
 		[self.tableView endUpdates];
