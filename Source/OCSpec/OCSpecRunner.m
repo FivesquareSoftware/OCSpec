@@ -87,7 +87,7 @@ NSString *kOCErrorInfoKeyMessage = @"kOCErrorInfoKeyMessage";
                     @try {
                         result = [[OCExampleResult alloc] initWithExampleName:mString inGroup:group];
                         [self startBenchmark];
-//                        [groupInstance performSelector:mSel];
+//                        [groupInstance performSelector:mSel]; // ARC dislikes this
 						objc_msgSend(groupInstance,mSel);
                         result.success = YES;
                     }
