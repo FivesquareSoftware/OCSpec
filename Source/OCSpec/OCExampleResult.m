@@ -36,6 +36,7 @@
 
 @synthesize group=group_;
 @synthesize exampleName=exampleName_;
+@synthesize context=context_;
 @synthesize success=success_;
 @synthesize elapsed=elapsed_;
 @synthesize error=error_;

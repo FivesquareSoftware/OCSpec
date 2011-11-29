@@ -37,8 +37,9 @@
 
 @property (nonatomic, assign) Class group;
 @property (nonatomic, strong) NSString *exampleName;
+@property (nonatomic, strong) id context;
 @property (nonatomic, assign) BOOL success;
-@property (nonatomic, assign) long elapsed;
+@property (nonatomic, assign) CFTimeInterval elapsed;
 @property (nonatomic, strong) NSException *error;
 
 - (id) initWithExampleName:(NSString *)anExampleName inGroup:(Class)aGroup;

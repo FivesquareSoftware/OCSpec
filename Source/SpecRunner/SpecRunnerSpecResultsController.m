@@ -138,7 +138,7 @@ static NSString *kExampleResultCellIdentifier = @"kExampleResultCellIdentifier";
 	OCExampleResult *resultAtIndex = [groupAtIndex resultAtIndex:indexPath.row];
 	SpecRunnerExampleResultCell *cell = (SpecRunnerExampleResultCell *)[tableView dequeueReusableCellWithIdentifier:kExampleResultCellIdentifier];
 	if(cell == nil) {
-        cell = [[SpecRunnerExampleResultCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kExampleResultCellIdentifier];
+        cell = [[SpecRunnerExampleResultCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:kExampleResultCellIdentifier];
 	}
 	cell.result = resultAtIndex;
 	return cell;

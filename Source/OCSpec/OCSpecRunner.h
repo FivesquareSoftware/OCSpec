@@ -47,15 +47,9 @@ extern NSString *kOCErrorInfoKeyMessage;
 
 @property (nonatomic, strong) NSArray *exampleGroups;
 @property (nonatomic, weak) id<OCSpecRunnerDelegate> delegate;
-@property (nonatomic, assign) unsigned long long startTime;
-@property (nonatomic, assign) unsigned long long stopTime;
 
 - (id) initWithExampleGroups:(NSArray *)someExampleGroups;
 
 - (NSMutableArray *) run;
-- (void) startBenchmark;
-- (void) stopBenchmark;
-- (long) elapsed;
-- (unsigned long long) currentMilliseconds;
 
 @end

@@ -45,6 +45,14 @@ NSString *kOCErrorInfoKeyGroup = @"kOCErrorInfoKeyGroup";
 NSString *kOCErrorInfoKeyMessage = @"kOCErrorInfoKeyMessage";
 
 
+@interface OCSpecRunner()
+@property (nonatomic, assign) CFAbsoluteTime startTime;
+@property (nonatomic, assign) CFAbsoluteTime stopTime;
+- (CFTimeInterval) elapsed;
+
+@end
+
+
 @implementation OCSpecRunner
 
 @synthesize exampleGroups=exampleGroups_;
@@ -65,9 +73,11 @@ NSString *kOCErrorInfoKeyMessage = @"kOCErrorInfoKeyMessage";
 - (NSMutableArray *) run {
     NSMutableArray *results = [NSMutableArray new];
     OCExampleResult *result;
-    for (Class group in self.exampleGroups) {
+	NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"description" ascending:YES];
+	NSArray *sortedExampleGroups = [self.exampleGroups sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]];
+    for (Class group in sortedExampleGroups) {
         NSLog(@"Running example group: %@",group);
-        id groupInstance;
+        OCExampleGroup *groupInstance;
         @try {
             groupInstance = [group new];
             if([groupInstance respondsToSelector:@selector(beforeAll)]) {
@@ -86,7 +96,8 @@ NSString *kOCErrorInfoKeyMessage = @"kOCErrorInfoKeyMessage";
                     }
                     @try {
                         result = [[OCExampleResult alloc] initWithExampleName:mString inGroup:group];
-                        [self startBenchmark];
+						groupInstance.result = result;
+						startTime_ = CFAbsoluteTimeGetCurrent();
 //                        [groupInstance performSelector:mSel]; // ARC dislikes this
 						objc_msgSend(groupInstance,mSel);
                         result.success = YES;
@@ -99,7 +110,7 @@ NSString *kOCErrorInfoKeyMessage = @"kOCErrorInfoKeyMessage";
                         result.error = e;
                     }
                     @finally {
-                        [self stopBenchmark];
+						stopTime_ = CFAbsoluteTimeGetCurrent();
                         result.elapsed = [self elapsed];
                         if([groupInstance respondsToSelector:@selector(afterEach)]) {
                             [groupInstance performSelector:@selector(afterEach)];
@@ -141,33 +152,19 @@ NSString *kOCErrorInfoKeyMessage = @"kOCErrorInfoKeyMessage";
     return results;
 }
 
-- (void) startBenchmark {
-    self.startTime = [self currentMilliseconds];
-}
-
-- (void) stopBenchmark {
-    self.stopTime = [self currentMilliseconds];
-}
-
-// You can only call this once for each invocation of start/stopBenchmark
-- (long) elapsed {
+- (CFTimeInterval) elapsed {
     NSAssert(startTime_ > 0, @"Start time not set");
     NSAssert(stopTime_ > 0, @"Stop time not set");    
-    long elapsed =  self.stopTime-self.startTime;
-    NSLog(@"elapsed: %ld",elapsed);
-    self.startTime = -1;
-    self.stopTime = -1;
-    return elapsed;
+
+	CFTimeInterval elapsed = (stopTime_ - startTime_);
+    NSLog(@"elapsed: %f",elapsed);
+
+    startTime_ = 0;
+    stopTime_ = 0;
+    
+	return elapsed;
 }
 
-- (unsigned long long) currentMilliseconds {
-    struct timeval now;
-    unsigned long long currentMillis;
-        
-    gettimeofday(&now, NULL);
-    currentMillis = now.tv_sec * 1000 + (now.tv_usec / 1000) ;
-    return currentMillis;
-}
 
 @end
 

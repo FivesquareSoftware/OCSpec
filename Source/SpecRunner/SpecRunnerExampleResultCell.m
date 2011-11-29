@@ -49,6 +49,7 @@
 	if(result_ != newResult){
 		result_ = newResult;
 		self.textLabel.text = result_.exampleName;
+		self.detailTextLabel.text = [result_.context description];
 		 statusImage_ = nil;
 		self.imageView.image = self.statusImage;
 	}

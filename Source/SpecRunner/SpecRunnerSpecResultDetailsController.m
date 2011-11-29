@@ -41,6 +41,7 @@ static NSString *kResultDetailsCellIdentifier = @"kResultDetailsCellIdentifier";
 enum  {
 	kSpecRunnerSpecResultDetailsControllerSectionGroup
 	, kSpecRunnerSpecResultDetailsControllerSectionExampleName
+	, kSpecRunnerSpecResultDetailsControllerSectionExampleContext
 	, kSpecRunnerSpecResultDetailsControllerSectionExampleTime
 	, kSpecRunnerSpecResultDetailsControllerSectionExampleStatus
 	, kSpecRunnerSpecResultDetailsControllerSectionExampleError
@@ -114,7 +115,7 @@ enum  {
 }
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-	return 5;
+	return kSpecRunnerSpecResultDetailsControllerSectionExampleError+1;
 }
 
 - (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -132,9 +133,13 @@ enum  {
 			cell.keyLabel.text = @"Example";
 			cell.valueLabel.text = self.result.exampleName;
 			break;
+		case kSpecRunnerSpecResultDetailsControllerSectionExampleContext:
+			cell.keyLabel.text = @"Context";
+			cell.valueLabel.text = self.result.context;
+			break;
 		case kSpecRunnerSpecResultDetailsControllerSectionExampleTime:
 			cell.keyLabel.text = @"Elapsed";
-			cell.valueLabel.text = [NSString stringWithFormat:@"%d (ms)",self.result.elapsed];
+			cell.valueLabel.text = [NSString stringWithFormat:@"%d (s)",self.result.elapsed];
 			break;
 		case kSpecRunnerSpecResultDetailsControllerSectionExampleStatus:
 			cell.keyLabel.text = @"Status";

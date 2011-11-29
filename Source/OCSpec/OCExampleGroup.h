@@ -31,8 +31,9 @@
 
 #import <Foundation/Foundation.h>
 
-@class SpecHelper;
+#import "OCExampleResult.h"
 
+@class SpecHelper;
 
 /** Mostly here just to satisfy compiler. */
 @protocol OCExampleGroup <NSObject>
@@ -49,6 +50,7 @@
 }
 
 @property (nonatomic, strong) SpecHelper *specHelper;
+@property (nonatomic, strong) OCExampleResult *result; ///< Points the the result for the currently running example
 
 + (NSArray *) groups;
 

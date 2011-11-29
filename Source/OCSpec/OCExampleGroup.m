@@ -40,6 +40,7 @@ static NSMutableArray *subclasses = nil;
 @implementation OCExampleGroup
 
 @synthesize specHelper=specHelper_;
+@synthesize result=result_;
 
 - (SpecHelper *) specHelper {
 	if(specHelper_ == nil) {
