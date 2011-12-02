@@ -66,6 +66,11 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
 		self.textLabel.font = [UIFont boldSystemFontOfSize:12.0];
+		self.textLabel.adjustsFontSizeToFitWidth = YES;
+		self.textLabel.minimumFontSize = 12.f;
+		
+		self.detailTextLabel.font = [UIFont systemFontOfSize:12.f];
+		
 		self.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 		self.showsReorderControl = NO;
     }
