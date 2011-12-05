@@ -36,6 +36,8 @@
 
 
 @interface SpecRunnerAppDelegate()
+- (void) runningSpecs;
+- (void) stoppedSpecs;
 - (void) runSpecsInAnotherThread;
 @end
 

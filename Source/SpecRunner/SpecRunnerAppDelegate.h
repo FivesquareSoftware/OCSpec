@@ -46,8 +46,6 @@
 
 
 - (void) runSpecs:(id)sender;
-- (void) runningSpecs;
-- (void) stoppedSpecs;
 
 @end
 

@@ -139,7 +139,7 @@ enum  {
 			break;
 		case kSpecRunnerSpecResultDetailsControllerSectionExampleTime:
 			cell.keyLabel.text = @"Elapsed";
-			cell.valueLabel.text = [NSString stringWithFormat:@"%d (s)",self.result.elapsed];
+			cell.valueLabel.text = [NSString stringWithFormat:@"%.2fs",self.result.elapsed];
 			break;
 		case kSpecRunnerSpecResultDetailsControllerSectionExampleStatus:
 			cell.keyLabel.text = @"Status";
