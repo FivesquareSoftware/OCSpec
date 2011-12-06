@@ -252,7 +252,7 @@ static NSString *kExampleResultCellIdentifier = @"kExampleResultCellIdentifier";
 }
 
 - (void) addResult:(OCExampleResult *)result {	  
-	dispatch_sync(dispatch_get_main_queue(), ^{
+	dispatch_async(dispatch_get_main_queue(), ^{
 		NSUInteger section;
 		SpecRunnerGroupResults *groupResults = [self resultsForGroup:result.group index:&section];
 		NSUInteger row = [groupResults numberOfResults];
