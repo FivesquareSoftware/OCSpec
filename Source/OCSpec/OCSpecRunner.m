@@ -74,7 +74,7 @@ NSString *kOCErrorInfoKeyMessage = @"kOCErrorInfoKeyMessage";
     NSMutableArray *results = [NSMutableArray new];
     OCExampleResult *result;
 	NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"description" ascending:YES];
-	NSArray *sortedExampleGroups = [self.exampleGroups sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]];
+	NSArray *sortedExampleGroups = [self.exampleGroups sortedArrayUsingDescriptors:@[sortDescriptor]];
     for (Class group in sortedExampleGroups) {
         NSLog(@"Running example group: %@",group);
         OCExampleGroup *groupInstance;
@@ -130,7 +130,7 @@ NSString *kOCErrorInfoKeyMessage = @"kOCErrorInfoKeyMessage";
             NSLog(@"exception: %@",[e name]);
             NSLog(@"reason: %@",[e reason]);
             NSLog(@"stack: %@",[e callStackSymbols]);
-			if(delegate_ && [delegate_ respondsToSelector:@selector(exampleDidFinish:)]) {
+			if(delegate_ && [delegate_ respondsToSelector:@selector(errorRunningGroup:)]) {
 				[self.delegate errorRunningGroup:[NSDictionary dictionaryWithObjectsAndKeys:group,kOCErrorInfoKeyGroup,[e reason],kOCErrorInfoKeyMessage,nil]];
 			}
         }
@@ -142,7 +142,9 @@ NSString *kOCErrorInfoKeyMessage = @"kOCErrorInfoKeyMessage";
                     }
                     @catch (NSException * e) {
                         NSLog(@"Error running %@.afterAll (%@)",group,e);
-                        [self.delegate errorRunningGroup:[NSDictionary dictionaryWithObjectsAndKeys:group,kOCErrorInfoKeyGroup,[e reason],kOCErrorInfoKeyMessage,nil]];
+                        if(delegate_ && [delegate_ respondsToSelector:@selector(errorRunningGroup:)]) {
+                            [self.delegate errorRunningGroup:[NSDictionary dictionaryWithObjectsAndKeys:group,kOCErrorInfoKeyGroup,[e reason],kOCErrorInfoKeyMessage,nil]];
+                        }
                     }
                 }
                 groupInstance = nil;
