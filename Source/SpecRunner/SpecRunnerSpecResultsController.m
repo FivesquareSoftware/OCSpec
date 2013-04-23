@@ -189,6 +189,9 @@ static NSString *kExampleResultCellIdentifier = @"kExampleResultCellIdentifier";
 
 #pragma mark - Spec Runner Delegate
 
+- (void) exampleStarted:(NSString *)exampleName {
+	
+}
 
 - (void) exampleDidFinish:(OCExampleResult *)result {
 	[self addResult:result];

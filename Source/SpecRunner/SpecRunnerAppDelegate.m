@@ -33,7 +33,7 @@
 #import "SpecRunnerSpecResultsController.h"
 
 #import "OCSpec.h"
-
+#import <QuartzCore/QuartzCore.h>
 
 @interface SpecRunnerAppDelegate()
 - (void) runningSpecs;
@@ -47,6 +47,7 @@
 @synthesize navigationController=navigationController_;
 @synthesize overlayView=overlayView_;
 @synthesize activityIndicator=activityIndicator_;
+@synthesize statusLabel = statusLabel_;
 @synthesize specResultsController=specResultsController_;
 @synthesize srunner=srunner_;
 
@@ -69,11 +70,23 @@
 	activityIndicator_.center = navigationController_.view.center;
 	[window_ addSubview:activityIndicator_];
 	
+	statusLabel_ = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, window_.bounds.size.width*.9, 32.f)];
+	statusLabel_.backgroundColor = [UIColor colorWithWhite:0 alpha:.65];
+	statusLabel_.layer.cornerRadius = 7.f;
+	statusLabel_.font = [UIFont boldSystemFontOfSize:17.f];
+//	statusLabel_.numberOfLines = 2;
+	statusLabel_.textColor = [UIColor whiteColor];
+	statusLabel_.textAlignment = NSTextAlignmentCenter;
+	statusLabel_.center = CGPointMake(CGRectGetMidX(window_.bounds), CGRectGetMaxY(window_.bounds)-statusLabel_.bounds.size.height);
+	[window_ addSubview:statusLabel_];
+	
 	[window_ insertSubview:navigationController_.view belowSubview:overlayView_];
 
 	window_.backgroundColor = [UIColor blackColor];
 	
 	[window_ makeKeyAndVisible];
+	
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(runningSpec:) name:kOCSpecRunnerNotificationExampleStarted object:nil];
 
 	srunner_ = [[OCSpecRunner alloc] initWithExampleGroups:[OCExampleGroup groups]];
 	self.srunner.delegate = specResultsController_;
@@ -99,13 +112,22 @@
 	[UIView beginAnimations:nil context:nil];
 	[activityIndicator_ startAnimating];
 	overlayView_.alpha = 0.45f;
+	statusLabel_.alpha = 1.f;
 	[UIView commitAnimations];
+}
+
+- (void) runningSpec:(NSNotification *)notification {
+	dispatch_async(dispatch_get_main_queue(), ^{
+		statusLabel_.text = [NSString stringWithFormat:@"-> %@",[notification object]];
+		//	statusLabel_.text = [notification object];
+	});
 }
 	
 - (void) stoppedSpecs {
 	[UIView beginAnimations:nil context:nil];
 	overlayView_.alpha = 0.f;
 	[activityIndicator_ stopAnimating];
+	statusLabel_.alpha = 0.f;
 	[UIView commitAnimations];
 }
 

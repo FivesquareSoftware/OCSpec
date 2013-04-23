@@ -44,6 +44,8 @@
 NSString *kOCErrorInfoKeyGroup = @"kOCErrorInfoKeyGroup";
 NSString *kOCErrorInfoKeyMessage = @"kOCErrorInfoKeyMessage";
 
+NSString *kOCSpecRunnerNotificationExampleStarted = @"kOCSpecRunnerNotificationExampleStarted";
+
 
 @interface OCSpecRunner()
 @property (nonatomic, assign) CFAbsoluteTime startTime;
@@ -91,6 +93,10 @@ NSString *kOCErrorInfoKeyMessage = @"kOCErrorInfoKeyMessage";
                 NSString *mString = [NSString stringWithUTF8String:mName];
                 if([mString rangeOfString:@"should"].location == 0) {
                     NSLog(@"Running example: %@",mString);
+					if ([delegate_ respondsToSelector:@selector(exampleStarted:)]) {
+						[delegate_ exampleStarted:mString];
+					}					
+					[[NSNotificationCenter defaultCenter] postNotificationName:kOCSpecRunnerNotificationExampleStarted object:mString];
                     if([groupInstance respondsToSelector:@selector(beforeEach)]){
                         [groupInstance performSelector:@selector(beforeEach)];
                     }

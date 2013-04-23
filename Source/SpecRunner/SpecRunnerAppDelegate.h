@@ -41,6 +41,7 @@
 @property (nonatomic, strong) UINavigationController *navigationController;
 @property (nonatomic, strong) UIView *overlayView;
 @property (nonatomic, strong) UIActivityIndicatorView *activityIndicator;
+@property (nonatomic, strong) UILabel *statusLabel;
 @property (nonatomic, strong) SpecRunnerSpecResultsController *specResultsController;
 @property (nonatomic, strong) OCSpecRunner *srunner;
 

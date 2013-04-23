@@ -35,8 +35,11 @@
 extern NSString *kOCErrorInfoKeyGroup;
 extern NSString *kOCErrorInfoKeyMessage;
 
+extern NSString *kOCSpecRunnerNotificationExampleStarted;
+
 @protocol OCSpecRunnerDelegate<NSObject>
 @optional
+- (void) exampleStarted:(NSString *)exampleName;
 - (void) exampleDidFinish:(OCExampleResult *)result;
 - (void) errorRunningGroup:(NSDictionary *)errorInfo;
 @end
