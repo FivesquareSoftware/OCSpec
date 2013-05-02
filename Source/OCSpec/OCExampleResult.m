@@ -34,22 +34,26 @@
 
 @implementation OCExampleResult
 
-@synthesize group=group_;
-@synthesize exampleName=exampleName_;
-@synthesize context=context_;
-@synthesize success=success_;
-@synthesize elapsed=elapsed_;
-@synthesize error=error_;
-
-- (id) initWithExampleName:(NSString *)anExampleName inGroup:(Class)aGroup {
-    self = [super init];
-    if (self != nil) {
-        self.group = aGroup;
-        self.exampleName = anExampleName;
-    }
-    return self;
+@dynamic running;
+- (BOOL) isRunning {
+	return _startTime != 0 && _stopTime == 0;
 }
 
+- (CFTimeInterval) elapsed {
+    NSAssert(_startTime > 0, @"Start time not set");
+    NSAssert(_stopTime > 0, @"Stop time not set");
+	
+	CFTimeInterval elapsed = (_stopTime - _startTime);
+    NSLog(@"elapsed: %f",elapsed);
+    
+	return elapsed;
+}
+
++ (id) withExample:(OCExample *)example {
+	OCExampleResult *result = [self new];
+	result.example = example;
+	return result;
+}
 
 
 @end

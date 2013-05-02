@@ -19,8 +19,6 @@
 		A4626A6E1419922D005544D6 /* SpecRunnerAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A4626A5E1419922D005544D6 /* SpecRunnerAppDelegate.m */; };
 		A4626A6F1419922D005544D6 /* SpecRunnerExampleResultCell.h in Headers */ = {isa = PBXBuildFile; fileRef = A4626A5F1419922D005544D6 /* SpecRunnerExampleResultCell.h */; };
 		A4626A701419922D005544D6 /* SpecRunnerExampleResultCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A4626A601419922D005544D6 /* SpecRunnerExampleResultCell.m */; };
-		A4626A711419922D005544D6 /* SpecRunnerGroupResults.h in Headers */ = {isa = PBXBuildFile; fileRef = A4626A611419922D005544D6 /* SpecRunnerGroupResults.h */; };
-		A4626A721419922D005544D6 /* SpecRunnerGroupResults.m in Sources */ = {isa = PBXBuildFile; fileRef = A4626A621419922D005544D6 /* SpecRunnerGroupResults.m */; };
 		A4626A731419922D005544D6 /* SpecRunnerLabelValueCell.h in Headers */ = {isa = PBXBuildFile; fileRef = A4626A631419922D005544D6 /* SpecRunnerLabelValueCell.h */; };
 		A4626A741419922D005544D6 /* SpecRunnerLabelValueCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A4626A641419922D005544D6 /* SpecRunnerLabelValueCell.m */; };
 		A4626A751419922D005544D6 /* SpecRunnerSpecResultDetailsController.h in Headers */ = {isa = PBXBuildFile; fileRef = A4626A651419922D005544D6 /* SpecRunnerSpecResultDetailsController.h */; };
@@ -29,6 +27,8 @@
 		A4626A781419922D005544D6 /* SpecRunnerSpecResultErrorDetailsController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4626A681419922D005544D6 /* SpecRunnerSpecResultErrorDetailsController.m */; };
 		A4626A791419922D005544D6 /* SpecRunnerSpecResultsController.h in Headers */ = {isa = PBXBuildFile; fileRef = A4626A691419922D005544D6 /* SpecRunnerSpecResultsController.h */; };
 		A4626A7A1419922D005544D6 /* SpecRunnerSpecResultsController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4626A6A1419922D005544D6 /* SpecRunnerSpecResultsController.m */; };
+		A4B1263E173180D400F06139 /* OCExample.h in Headers */ = {isa = PBXBuildFile; fileRef = A4B1263C173180D400F06139 /* OCExample.h */; };
+		A4B1263F173180D400F06139 /* OCExample.m in Sources */ = {isa = PBXBuildFile; fileRef = A4B1263D173180D400F06139 /* OCExample.m */; };
 		AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AACBBE490F95108600F1A2B1 /* Foundation.framework */; };
 /* End PBXBuildFile section */
 
@@ -45,8 +45,6 @@
 		A4626A5E1419922D005544D6 /* SpecRunnerAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpecRunnerAppDelegate.m; sourceTree = "<group>"; };
 		A4626A5F1419922D005544D6 /* SpecRunnerExampleResultCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpecRunnerExampleResultCell.h; sourceTree = "<group>"; };
 		A4626A601419922D005544D6 /* SpecRunnerExampleResultCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpecRunnerExampleResultCell.m; sourceTree = "<group>"; };
-		A4626A611419922D005544D6 /* SpecRunnerGroupResults.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpecRunnerGroupResults.h; sourceTree = "<group>"; };
-		A4626A621419922D005544D6 /* SpecRunnerGroupResults.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpecRunnerGroupResults.m; sourceTree = "<group>"; };
 		A4626A631419922D005544D6 /* SpecRunnerLabelValueCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpecRunnerLabelValueCell.h; sourceTree = "<group>"; };
 		A4626A641419922D005544D6 /* SpecRunnerLabelValueCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpecRunnerLabelValueCell.m; sourceTree = "<group>"; };
 		A4626A651419922D005544D6 /* SpecRunnerSpecResultDetailsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpecRunnerSpecResultDetailsController.h; sourceTree = "<group>"; };
@@ -55,6 +53,8 @@
 		A4626A681419922D005544D6 /* SpecRunnerSpecResultErrorDetailsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpecRunnerSpecResultErrorDetailsController.m; sourceTree = "<group>"; };
 		A4626A691419922D005544D6 /* SpecRunnerSpecResultsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpecRunnerSpecResultsController.h; sourceTree = "<group>"; };
 		A4626A6A1419922D005544D6 /* SpecRunnerSpecResultsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpecRunnerSpecResultsController.m; sourceTree = "<group>"; };
+		A4B1263C173180D400F06139 /* OCExample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCExample.h; sourceTree = "<group>"; };
+		A4B1263D173180D400F06139 /* OCExample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCExample.m; sourceTree = "<group>"; };
 		AACBBE490F95108600F1A2B1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D2AAC07E0554694100DB518D /* libOCSpec.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libOCSpec.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -115,6 +115,8 @@
 				29995B57131F1C0200E6C4D6 /* OCSpecRunner.m */,
 				29995B51131F1C0200E6C4D6 /* OCExampleGroup.h */,
 				29995B52131F1C0200E6C4D6 /* OCExampleGroup.m */,
+				A4B1263C173180D400F06139 /* OCExample.h */,
+				A4B1263D173180D400F06139 /* OCExample.m */,
 				29995B53131F1C0200E6C4D6 /* OCExampleResult.h */,
 				29995B54131F1C0200E6C4D6 /* OCExampleResult.m */,
 			);
@@ -128,8 +130,6 @@
 				A4626A5E1419922D005544D6 /* SpecRunnerAppDelegate.m */,
 				A4626A691419922D005544D6 /* SpecRunnerSpecResultsController.h */,
 				A4626A6A1419922D005544D6 /* SpecRunnerSpecResultsController.m */,
-				A4626A611419922D005544D6 /* SpecRunnerGroupResults.h */,
-				A4626A621419922D005544D6 /* SpecRunnerGroupResults.m */,
 				A4626A5F1419922D005544D6 /* SpecRunnerExampleResultCell.h */,
 				A4626A601419922D005544D6 /* SpecRunnerExampleResultCell.m */,
 				A4626A631419922D005544D6 /* SpecRunnerLabelValueCell.h */,
@@ -156,11 +156,11 @@
 				29995B7A131F1C0200E6C4D6 /* OCSpec_Prefix.pch in Headers */,
 				A4626A6D1419922D005544D6 /* SpecRunnerAppDelegate.h in Headers */,
 				A4626A6F1419922D005544D6 /* SpecRunnerExampleResultCell.h in Headers */,
-				A4626A711419922D005544D6 /* SpecRunnerGroupResults.h in Headers */,
 				A4626A731419922D005544D6 /* SpecRunnerLabelValueCell.h in Headers */,
 				A4626A751419922D005544D6 /* SpecRunnerSpecResultDetailsController.h in Headers */,
 				A4626A771419922D005544D6 /* SpecRunnerSpecResultErrorDetailsController.h in Headers */,
 				A4626A791419922D005544D6 /* SpecRunnerSpecResultsController.h in Headers */,
+				A4B1263E173180D400F06139 /* OCExample.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -219,11 +219,11 @@
 				29995B79131F1C0200E6C4D6 /* OCSpecRunner.m in Sources */,
 				A4626A6E1419922D005544D6 /* SpecRunnerAppDelegate.m in Sources */,
 				A4626A701419922D005544D6 /* SpecRunnerExampleResultCell.m in Sources */,
-				A4626A721419922D005544D6 /* SpecRunnerGroupResults.m in Sources */,
 				A4626A741419922D005544D6 /* SpecRunnerLabelValueCell.m in Sources */,
 				A4626A761419922D005544D6 /* SpecRunnerSpecResultDetailsController.m in Sources */,
 				A4626A781419922D005544D6 /* SpecRunnerSpecResultErrorDetailsController.m in Sources */,
 				A4626A7A1419922D005544D6 /* SpecRunnerSpecResultsController.m in Sources */,
+				A4B1263F173180D400F06139 /* OCExample.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

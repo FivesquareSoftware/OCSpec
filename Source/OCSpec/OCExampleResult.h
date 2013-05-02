@@ -31,17 +31,20 @@
 
 #import <Foundation/Foundation.h>
 
+#import "OCExample.h"
 
-@interface OCExampleResult : NSObject {
-}
+@interface OCExampleResult : NSObject
 
-@property (nonatomic, assign) Class group;
-@property (nonatomic, strong) NSString *exampleName;
+@property (nonatomic, strong) OCExample *example;
 @property (nonatomic, strong) id context;
-@property (nonatomic, assign) BOOL success;
-@property (nonatomic, assign) CFTimeInterval elapsed;
+@property (nonatomic, readonly, getter = isRunning) BOOL running;
+@property (nonatomic) BOOL success;
+@property (nonatomic, getter = isDeferred) BOOL deferred;
+@property (nonatomic) CFAbsoluteTime startTime;
+@property (nonatomic) CFAbsoluteTime stopTime;
+@property (nonatomic, readonly) CFTimeInterval elapsed;
 @property (nonatomic, strong) NSException *error;
 
-- (id) initWithExampleName:(NSString *)anExampleName inGroup:(Class)aGroup;
++ (id) withExample:(OCExample *)example;
 
 @end

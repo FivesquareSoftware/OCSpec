@@ -35,26 +35,12 @@
 #import <objc/runtime.h>
 
 
-static NSMutableArray *subclasses = nil;
 
 @implementation OCExampleGroup
 
-@synthesize specHelper=specHelper_;
-@synthesize result=result_;
 
-- (SpecHelper *) specHelper {
-	if(specHelper_ == nil) {
-		Class klass;
-		if( (klass = NSClassFromString(@"SpecHelper")) ) {
-			specHelper_ = [klass new];
-		}
-	}
-	return specHelper_;
-}
-
-
-
-+ (NSArray *) groups {
++ (NSArray *) subclasses {
+	static NSMutableArray *subclasses = nil;
     if(subclasses == nil) {
         subclasses = [NSMutableArray new];
         int numClasses;
@@ -81,8 +67,39 @@ static NSMutableArray *subclasses = nil;
     return subclasses;
 }
 
+- (SpecHelper *) specHelper {
+	if(_specHelper == nil) {
+		Class klass;
+		if( (klass = NSClassFromString(@"SpecHelper")) ) {
+			_specHelper = [klass new];
+		}
+	}
+	return _specHelper;
+}
+
+- (id)init {
+    self = [super init];
+    if (self) {
+        _results = [NSMutableArray new];
+    }
+    return self;
+}
+
 - (void)failWithException:(NSException *)exception {
 	@throw exception;
 }
+
+- (NSUInteger) numberOfResults {
+	return [self.results count];
+}
+
+- (OCExampleResult *) resultAtIndex:(NSUInteger)index {
+	return [self.results objectAtIndex:index];
+}
+
+- (void) addResult:(OCExampleResult *)aResult {
+	[self.results addObject:aResult];
+}
+
 
 @end

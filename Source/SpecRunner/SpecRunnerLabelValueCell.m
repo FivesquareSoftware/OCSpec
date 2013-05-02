@@ -41,21 +41,17 @@
 @implementation SpecRunnerLabelValueCell
 
 
-@synthesize keyLabel=keyLabel_;
-@synthesize valueLabel=valueLabel_;
-
-
 - (id) initWithStyle:(UITableViewCellStyle)aStyle reuseIdentifier:(NSString *)aReuseIdentifier {
 	self = [super initWithStyle:aStyle reuseIdentifier:aReuseIdentifier];
 	if (self != nil) {
 
-		keyLabel_ = [[UILabel alloc] initWithFrame:CGRectMake(0.0, 0.0, kSpecRunnerLabelValueCellLabelWidth, kSpecRunnerLabelValueCellLabelHeight)];
-		keyLabel_.backgroundColor = [UIColor clearColor];
-		keyLabel_.font = [UIFont boldSystemFontOfSize:12.0];
-		keyLabel_.textAlignment = UITextAlignmentRight;
-		keyLabel_.textColor = [UIColor colorWithRed:(107.0/255.0) green:(127.0/255.0) blue:(155.0/255.0) alpha:1.0]; 
-		keyLabel_.autoresizingMask = UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleRightMargin; 
-		[self.contentView addSubview:keyLabel_];
+		_keyLabel = [[UILabel alloc] initWithFrame:CGRectMake(0.0, 0.0, kSpecRunnerLabelValueCellLabelWidth, kSpecRunnerLabelValueCellLabelHeight)];
+		_keyLabel.backgroundColor = [UIColor clearColor];
+		_keyLabel.font = [UIFont boldSystemFontOfSize:12.0];
+		_keyLabel.textAlignment = NSTextAlignmentRight;
+		_keyLabel.textColor = [UIColor colorWithRed:(107.0/255.0) green:(127.0/255.0) blue:(155.0/255.0) alpha:1.0]; 
+		_keyLabel.autoresizingMask = UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleRightMargin; 
+		[self.contentView addSubview:_keyLabel];
 		
 		
 		CGRect valueLabelFrame = CGRectMake(kSpecRunnerLabelValueCellLabelWidth + kSpecRunnerLabelValueCellLabelHorizontalPadding
@@ -63,14 +59,14 @@
 											, self.frame.size.width - (kSpecRunnerLabelValueCellLabelWidth + (kSpecRunnerLabelValueCellLabelHorizontalPadding * 3.0))
 											, kSpecRunnerLabelValueCellLabelHeight);
 		
-		valueLabel_ = [[UILabel alloc] initWithFrame:valueLabelFrame];
-		valueLabel_.backgroundColor = [UIColor clearColor];
-		valueLabel_.font = [UIFont boldSystemFontOfSize:12.0];
-		valueLabel_.textColor = [UIColor blackColor];
-		valueLabel_.lineBreakMode = UILineBreakModeWordWrap;
-		valueLabel_.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
-		valueLabel_.numberOfLines = 0;
-		[self.contentView addSubview:valueLabel_];
+		_valueLabel = [[UILabel alloc] initWithFrame:valueLabelFrame];
+		_valueLabel.backgroundColor = [UIColor clearColor];
+		_valueLabel.font = [UIFont boldSystemFontOfSize:12.0];
+		_valueLabel.textColor = [UIColor blackColor];
+		_valueLabel.lineBreakMode = NSLineBreakByWordWrapping;
+		_valueLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
+		_valueLabel.numberOfLines = 0;
+		[self.contentView addSubview:_valueLabel];
 		
 	}
 	return self;
@@ -80,8 +76,8 @@
 - (CGSize) sizeThatFits:(CGSize)size {
 	CGSize fitSize = [super sizeThatFits:size];
 	
-	CGSize maxValueSize = CGSizeMake(valueLabel_.frame.size.width, 1000.f);
-	CGSize valueSize = [valueLabel_.text sizeWithFont:valueLabel_.font constrainedToSize:maxValueSize lineBreakMode:valueLabel_.lineBreakMode];
+	CGSize maxValueSize = CGSizeMake(_valueLabel.frame.size.width, 1000.f);
+	CGSize valueSize = [_valueLabel.text sizeWithFont:_valueLabel.font constrainedToSize:maxValueSize lineBreakMode:_valueLabel.lineBreakMode];
 	
 	CGFloat labelHeight = valueSize.height > kSpecRunnerLabelValueCellLabelHeight ? valueSize.height : kSpecRunnerLabelValueCellLabelHeight;
 	

@@ -35,10 +35,7 @@
 @class SpecRunnerSpecResultDetailsController;
 @class SpecRunnerGroupResults;
 
-@interface SpecRunnerSpecResultsController : UITableViewController<OCSpecRunnerDelegate> {
-}
-
-@property (nonatomic, strong) NSMutableArray *tableData;
+@interface SpecRunnerSpecResultsController : UITableViewController<OCSpecRunnerDelegate>
 
 @property (nonatomic, strong) UIView *headerView;
 @property (nonatomic, strong) UILabel *headerLabel;

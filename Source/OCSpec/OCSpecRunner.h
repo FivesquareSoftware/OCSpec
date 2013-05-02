@@ -30,23 +30,34 @@
 
 #import <Foundation/Foundation.h>
 
+@class OCExampleGroup;
+@class OCExample;
 @class OCExampleResult;
 
-extern NSString *kOCErrorInfoKeyGroup;
-extern NSString *kOCErrorInfoKeyMessage;
+extern NSString *kOCSpecErrorDomain;
+enum {
+	kOCSpecErrorCodeGroupFailed = 1000,
+	kOCSpecErrorCodeAfterAllFailed = 1001
+};
 
+extern NSString *kOCErrorInfoKeyGroup;
+
+extern NSString *kOCSpecRunnerNotificationGroupStarted;
 extern NSString *kOCSpecRunnerNotificationExampleStarted;
+extern NSString *kOCSpecRunnerNotificationExampleFinished;
+extern NSString *kOCSpecRunnerNotificationgroupFinished;
 
 @protocol OCSpecRunnerDelegate<NSObject>
 @optional
-- (void) exampleStarted:(NSString *)exampleName;
+- (void) exampleGroupDidStart:(OCExampleGroup *)group;
+- (void) exampleDidStart:(OCExampleResult *)result;
 - (void) exampleDidFinish:(OCExampleResult *)result;
-- (void) errorRunningGroup:(NSDictionary *)errorInfo;
+- (void) exampleGroupDidFinish:(OCExampleGroup *)group;
+- (void) exampleGroupDidFailWithError:(NSError *)error;
 @end
 
 
-@interface OCSpecRunner : NSObject {
-}
+@interface OCSpecRunner : NSObject
 
 @property (nonatomic, strong) NSArray *exampleGroups;
 @property (nonatomic, weak) id<OCSpecRunnerDelegate> delegate;
@@ -54,5 +65,6 @@ extern NSString *kOCSpecRunnerNotificationExampleStarted;
 - (id) initWithExampleGroups:(NSArray *)someExampleGroups;
 
 - (NSMutableArray *) run;
+- (void) deferResult:(OCExampleResult *)result untilDone:(void(^)())exampleBlock;
 
 @end

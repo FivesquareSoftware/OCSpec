@@ -35,39 +35,23 @@
 
 
 @interface SpecRunnerExampleResultCell()
-- (UIImage *) statusImageForResult:(OCExampleResult *)aResult;
+@property (nonatomic, strong) UIImage *statusImage;
 @end
 
 
 @implementation SpecRunnerExampleResultCell
 
 
-@synthesize result=result_;
-@synthesize statusImage=statusImage_;
-
-- (void) setResult:(OCExampleResult *)newResult {
-	if(result_ != newResult){
-		result_ = newResult;
-		self.textLabel.text = result_.exampleName;
-		self.detailTextLabel.text = [result_.context description];
-		 statusImage_ = nil;
-		self.imageView.image = self.statusImage;
-	}
-}
-
-- (UIImage *) statusImage {
-	if(statusImage_ == nil) {
-		statusImage_ = [self statusImageForResult:self.result];
-	}
-	return statusImage_;
-}
-
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
-    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+    self = [super initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:reuseIdentifier];
     if (self) {
 		self.textLabel.font = [UIFont boldSystemFontOfSize:12.0];
 		self.textLabel.adjustsFontSizeToFitWidth = YES;
+#ifdef __IPHONE_6_0
+		[self.textLabel setMinimumScaleFactor:.8];
+#else
 		self.textLabel.minimumFontSize = 12.f;
+#endif
 		
 		self.detailTextLabel.font = [UIFont systemFontOfSize:12.f];
 		
@@ -75,6 +59,16 @@
 		self.showsReorderControl = NO;
     }
     return self;
+}
+
+- (void) updateWithResult:(OCExampleResult *)result {
+	if(_result != result){
+		_result = result;
+	}
+	self.textLabel.text = _result.example.name;
+	self.detailTextLabel.text = [_result.context description];
+	_statusImage = [self statusImageForResult:self.result];
+	self.imageView.image = self.statusImage;
 }
 
 - (UIImage *) statusImageForResult:(OCExampleResult *)aResult {
@@ -86,7 +80,15 @@
 	CGPoint imageViewCenter = CGPointMake(CGRectGetMidX(imageViewRect), CGRectGetMidY(imageViewRect));
 	CGRect imageRect = CGRectMake(imageViewCenter.x - 6.f, imageViewCenter.y - 6.f, 12.f, 12.f);
 
-	CGContextSetFillColorWithColor(context, result_.success ? [UIColor greenColor].CGColor : [UIColor redColor].CGColor);
+	
+	UIColor *dotColor;
+	if (_result.isRunning) {
+		dotColor = [UIColor orangeColor];
+	}
+	else {
+		dotColor = _result.success ? [UIColor greenColor] : [UIColor redColor];
+	}
+	CGContextSetFillColorWithColor(context, dotColor.CGColor);
 	CGContextFillEllipseInRect(context, imageRect);
 
 	UIImage *image = UIGraphicsGetImageFromCurrentImageContext();

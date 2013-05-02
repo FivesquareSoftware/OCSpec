@@ -31,6 +31,7 @@
 
 #import <Foundation/Foundation.h>
 
+#import "OCSpecRunner.h"
 #import "OCExampleResult.h"
 
 @class SpecHelper;
@@ -46,16 +47,23 @@
 
 @end
 
-@interface OCExampleGroup : NSObject <OCExampleGroup> {
-}
+@interface OCExampleGroup : NSObject <OCExampleGroup> 
 
+@property (nonatomic, strong) OCSpecRunner *specRunner;
 @property (nonatomic, strong) SpecHelper *specHelper;
-@property (nonatomic, strong) OCExampleResult *result; ///< Points the the result for the currently running example
+@property (nonatomic) NSUInteger index;
+@property (nonatomic, strong) NSMutableArray *results;
+/// Points the the result for the currently running example, which includes a pointer to the current example
+@property (nonatomic, strong) OCExampleResult *currentResult;
 
-+ (NSArray *) groups;
++ (NSArray *) subclasses;
 
 /** To support assertion frameworks. */
 - (void)failWithException:(NSException *)exception;
+
+- (NSUInteger) numberOfResults;
+- (OCExampleResult *) resultAtIndex:(NSUInteger)index;
+- (void) addResult:(OCExampleResult *)aResult;
 
 @end
 

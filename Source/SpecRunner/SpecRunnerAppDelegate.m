@@ -88,7 +88,7 @@
 	
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(runningSpec:) name:kOCSpecRunnerNotificationExampleStarted object:nil];
 
-	srunner_ = [[OCSpecRunner alloc] initWithExampleGroups:[OCExampleGroup groups]];
+	srunner_ = [[OCSpecRunner alloc] initWithExampleGroups:[OCExampleGroup subclasses]];
 	self.srunner.delegate = specResultsController_;
 	[self runSpecs:self];
 	
@@ -118,7 +118,7 @@
 
 - (void) runningSpec:(NSNotification *)notification {
 	dispatch_async(dispatch_get_main_queue(), ^{
-		statusLabel_.text = [NSString stringWithFormat:@"-> %@",[notification object]];
+		statusLabel_.text = [NSString stringWithFormat:@"-> %@",[[notification object] name]];
 		//	statusLabel_.text = [notification object];
 	});
 }

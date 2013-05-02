@@ -33,4 +33,5 @@
 
 #import "OCSpecRunner.h"
 #import "OCExampleGroup.h"
+#import "OCExample.h"
 #import "OCExampleResult.h"

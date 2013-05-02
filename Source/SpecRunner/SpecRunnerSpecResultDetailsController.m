@@ -54,11 +54,9 @@ enum  {
 #pragma mark - Properties
 
 
-@synthesize result=result_;
-
 - (void) setResult:(OCExampleResult *)newResult {
-	if(result_ != newResult){
-		result_ = newResult;
+	if(_result != newResult){
+		_result = newResult;
 		[self.tableView reloadData];
 	}
 }
@@ -127,11 +125,11 @@ enum  {
 	switch (indexPath.row) {
 		case kSpecRunnerSpecResultDetailsControllerSectionGroup:
 			cell.keyLabel.text = @"Group";
-			cell.valueLabel.text = [self.result.group description];
+			cell.valueLabel.text = [self.result.example.group description];
 			break;
 		case kSpecRunnerSpecResultDetailsControllerSectionExampleName:
 			cell.keyLabel.text = @"Example";
-			cell.valueLabel.text = self.result.exampleName;
+			cell.valueLabel.text = self.result.example.name;
 			break;
 		case kSpecRunnerSpecResultDetailsControllerSectionExampleContext:
 			cell.keyLabel.text = @"Context";

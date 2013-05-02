@@ -35,7 +35,7 @@
 #import "SpecRunnerExampleResultCell.h"
 #import "SpecRunnerSpecResultDetailsController.h"
 
-#import	 "SpecRunnerGroupResults.h"
+//#import	 "SpecRunnerGroupResults.h"
 #import "OCSpec.h"
 
 
@@ -43,8 +43,8 @@ static NSString *kExampleResultCellIdentifier = @"kExampleResultCellIdentifier";
 
 
 @interface SpecRunnerSpecResultsController()
-- (SpecRunnerGroupResults *) resultsForGroup:(Class)aGroup index:(NSUInteger *)index;
-- (void) addResult:(OCExampleResult *)result;
+@property (nonatomic, strong) NSMutableSet *groups;
+@property (nonatomic, readonly) BOOL hasResults;
 @end
 
 
@@ -55,10 +55,40 @@ static NSString *kExampleResultCellIdentifier = @"kExampleResultCellIdentifier";
 
 #pragma mark - Properties
 
+@dynamic hasResults;
+- (BOOL) hasResults {
+	return [self.groups count] > 0;
+}
 
-@synthesize tableData=tableData_;
-@synthesize headerView=headerView_;
-@synthesize headerLabel=headerLabel_;
+
+// ========================================================================== //
+
+#pragma mark - Object
+
+
+
+- (void) initialize {
+	// Initialization code
+	_groups = [NSMutableSet new];
+}
+
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+		[self initialize];
+    }
+    return self;
+}
+
+- (id)initWithCoder:(NSCoder *)coder {
+    self = [super initWithCoder:coder];
+    if (self) {
+		[self initialize];
+    }
+    return self;
+}
+
 
 
 
@@ -75,16 +105,18 @@ static NSString *kExampleResultCellIdentifier = @"kExampleResultCellIdentifier";
 	UIBarButtonItem *runButton = [[UIBarButtonItem alloc] initWithTitle:@"Run" style:UIBarButtonItemStyleBordered target:[[UIApplication sharedApplication] delegate] action:@selector(runSpecs:)];
 	self.navigationItem.rightBarButtonItem = runButton;
 	
-	headerView_ = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320.f, 25.f)];
-	headerView_.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-	headerView_.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:.50];
+	_headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320.f, 25.f)];
+	_headerView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+	_headerView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:.50];
 	
-	headerLabel_ = [[UILabel alloc] initWithFrame:CGRectMake(12.f, 0, 302.f, 25.f)];
-	headerLabel_.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-	headerLabel_.textColor = [UIColor whiteColor];
+	_headerLabel = [[UILabel alloc] initWithFrame:CGRectMake(12.f, 0, 302.f, 25.f)];
+	_headerLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+	_headerLabel.textColor = [UIColor whiteColor];
 	
 	self.tableView.dataSource = self;
 	self.tableView.delegate = self;
+	
+	[self.tableView registerClass:[SpecRunnerExampleResultCell class] forCellReuseIdentifier:kExampleResultCellIdentifier];
 }
 
 - (void) viewWillAppear:(BOOL)animated {
@@ -122,25 +154,23 @@ static NSString *kExampleResultCellIdentifier = @"kExampleResultCellIdentifier";
 #pragma mark - Table View Data Source
 
 - (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView {
-	return [self.tableData count];
+	NSUInteger count = [self.groups count];
+	return count;
 }
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+	NSUInteger count = 0;
 	if([self hasResults]) {
-		SpecRunnerGroupResults *resultsAtIndex = (SpecRunnerGroupResults *)[self.tableData objectAtIndex:section];
-		return [resultsAtIndex numberOfResults];
+		OCExampleGroup *group = [self groupAtIndex:section];
+		 count = [group numberOfResults];
 	}
-	return 0;
+	return count;
 }
 
 - (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-	SpecRunnerGroupResults *groupAtIndex = (SpecRunnerGroupResults *)[self.tableData objectAtIndex:indexPath.section];
-	OCExampleResult *resultAtIndex = [groupAtIndex resultAtIndex:indexPath.row];
+	OCExampleResult *resultAtIndex = [self resultAtIndexPath:indexPath];
 	SpecRunnerExampleResultCell *cell = (SpecRunnerExampleResultCell *)[tableView dequeueReusableCellWithIdentifier:kExampleResultCellIdentifier];
-	if(cell == nil) {
-        cell = [[SpecRunnerExampleResultCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:kExampleResultCellIdentifier];
-	}
-	cell.result = resultAtIndex;
+	[cell updateWithResult:resultAtIndex];
 	return cell;
 }
 
@@ -153,8 +183,7 @@ static NSString *kExampleResultCellIdentifier = @"kExampleResultCellIdentifier";
 }
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-	SpecRunnerGroupResults *groupAtIndex = (SpecRunnerGroupResults *)[self.tableData objectAtIndex:indexPath.section];
-	OCExampleResult *resultAtIndex = [groupAtIndex resultAtIndex:indexPath.row];
+	OCExampleResult *resultAtIndex = [self resultAtIndexPath:indexPath];
 
 	SpecRunnerSpecResultDetailsController *detailViewController = [[SpecRunnerSpecResultDetailsController alloc] initWithStyle:UITableViewStylePlain];
 	detailViewController.result = resultAtIndex;
@@ -172,9 +201,9 @@ static NSString *kExampleResultCellIdentifier = @"kExampleResultCellIdentifier";
 		aLabel.opaque = NO;
 		aLabel.backgroundColor = [UIColor clearColor];
 		aLabel.font = [UIFont boldSystemFontOfSize:14.0];
-		aLabel.textAlignment = UITextAlignmentLeft;
+		aLabel.textAlignment = NSTextAlignmentLeft;
 		aLabel.textColor = [UIColor whiteColor]; 
-		aLabel.text = [(SpecRunnerGroupResults *)[self.tableData objectAtIndex:section] description];
+		aLabel.text = [[[self groupAtIndex:section] class] description];
 		[hview addSubview:aLabel];
 		return hview;
 	}
@@ -189,15 +218,21 @@ static NSString *kExampleResultCellIdentifier = @"kExampleResultCellIdentifier";
 
 #pragma mark - Spec Runner Delegate
 
-- (void) exampleStarted:(NSString *)exampleName {
-	
+- (void) exampleGroupDidStart:(OCExampleGroup *)group {
+	[self insertGroup:group];
+}
+
+- (void) exampleDidStart:(OCExampleResult *)result {
+	[self insertResult:result];
 }
 
 - (void) exampleDidFinish:(OCExampleResult *)result {
-	[self addResult:result];
+	[self reloadResult:result];
 }
 	 
-- (void) errorRunningGroup:(NSDictionary *)errorInfo {
+- (void) exampleGroupDidFailWithError:(NSError *)error {
+	
+	NSDictionary *errorInfo = [error userInfo];
 	Class group = [errorInfo objectForKey:kOCErrorInfoKeyGroup];
 //	  NSString *msg = [errorInfo objectForKey:kOCErrorInfoKeyMessage];
 	
@@ -215,59 +250,68 @@ static NSString *kExampleResultCellIdentifier = @"kExampleResultCellIdentifier";
 
 // ========================================================================== //
 
-#pragma mark - Helpers
+#pragma mark - Model Access
 
 - (void) resetResultsData {
-	self.tableData = [NSMutableArray new];
+	[self.groups removeAllObjects];
 	[self.tableView reloadData];
 }
 
-- (BOOL) hasResults {
-	return [self.tableData count] > 0;
-}
-
-- (SpecRunnerGroupResults *) resultsForGroup:(Class)aGroup index:(NSUInteger *)index {
-	__block SpecRunnerGroupResults *foundGroup = nil;	
-	[self.tableData enumerateObjectsUsingBlock:^(SpecRunnerGroupResults *results, NSUInteger idx, BOOL *stop) {
-		if (results.group == aGroup) {
-			foundGroup = results;
-			if (index) {
-				*index = idx;
-			}
-			*stop = YES;
-		}
+- (OCExampleGroup *) groupAtIndex:(NSUInteger)index {
+	NSSet *objects = [_groups objectsPassingTest:^BOOL(OCExampleGroup *obj, BOOL *stop) {
+		return obj.index == index;
 	}];
-	if (nil == foundGroup) {
-		NSUInteger idx = [self.tableData count];
-		if (index) {
-			*index = idx;
-		}
-		foundGroup = [SpecRunnerGroupResults withGroup:aGroup];
-		[self.tableData addObject:foundGroup];
-
-		[self.tableView beginUpdates];
-		[self.tableView insertSections:[NSIndexSet indexSetWithIndex:idx] withRowAnimation:UITableViewRowAnimationNone];
-		[self.tableView endUpdates];
-
-		
-	}
-	return foundGroup;
+	OCExampleGroup *group = [objects anyObject];
+	return group;
 }
 
-- (void) addResult:(OCExampleResult *)result {	  
+- (OCExampleResult *) resultAtIndexPath:(NSIndexPath *)indexPath {
+	OCExampleGroup *group = [self groupAtIndex:indexPath.section];
+	return [group resultAtIndex:indexPath.row];
+}
+
+- (void) insertGroup:(OCExampleGroup *)group {
 	dispatch_async(dispatch_get_main_queue(), ^{
-		NSUInteger section;
-		SpecRunnerGroupResults *groupResults = [self resultsForGroup:result.group index:&section];
-		NSUInteger row = [groupResults numberOfResults];
-		[groupResults addResult:result];
-		
-		NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:section];
-		[self.tableView beginUpdates];
-		[self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationBottom];
-		[self.tableView endUpdates];
+//		NSInteger numberOfSections = [self.tableView numberOfSections];
+		[_groups addObject:group];
+//		if (group.index >= numberOfSections) {
+//			NSIndexSet *indexSet = [NSIndexSet indexSetWithIndex:group.index];
+//			[self.tableView beginUpdates];
+//			[self.tableView insertSections:indexSet withRowAnimation:UITableViewRowAnimationNone];
+//			[self.tableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationAutomatic];
+//			[self.tableView endUpdates];
+//		}
+		[self.tableView reloadData];
+	});
+}
+
+- (void) insertResult:(OCExampleResult *)result {
+	dispatch_async(dispatch_get_main_queue(), ^{
+//		NSIndexPath *indexPath = result.example.indexPath;
+//		NSInteger numberOfRows = [self.tableView numberOfRowsInSection:indexPath.section];
+//		if (indexPath.row >= numberOfRows) {
+//			[self.tableView beginUpdates];
+//			[self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationBottom];
+//			[self.tableView endUpdates];
+//			[self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+//		}
+//		NSIndexPath *indexPath = result.example.indexPath;
+//		[self.tableView beginUpdates];
+//		[self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+//		[self.tableView endUpdates];
+		[self.tableView reloadData];
+	});
+}
+
+- (void) reloadResult:(OCExampleResult *)result {
+	dispatch_async(dispatch_get_main_queue(), ^{
+		NSIndexPath *indexPath = result.example.indexPath;
+//		[self.tableView beginUpdates];
+//		[self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+//		[self.tableView endUpdates];
+		[self.tableView reloadData];
 		[self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
 	});
-
 }
 
 @end

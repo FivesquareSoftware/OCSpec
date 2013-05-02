@@ -33,11 +33,10 @@
 #import "OCSpec.h"
 
 
-@interface SpecRunnerExampleResultCell : UITableViewCell {
-}
+@interface SpecRunnerExampleResultCell : UITableViewCell
 
-@property (nonatomic, weak) OCExampleResult *result;
+@property (nonatomic, weak, readonly) OCExampleResult *result;
 
-@property (nonatomic, strong) UIImage *statusImage;
+- (void) updateWithResult:(OCExampleResult *)result;
 
 @end
