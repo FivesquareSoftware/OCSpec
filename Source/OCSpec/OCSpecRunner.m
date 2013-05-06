@@ -50,6 +50,11 @@ NSString *kOCSpecRunnerNotificationExampleFinished = @"kOCSpecRunnerNotification
 NSString *kOCSpecRunnerNotificationgroupFinished = @"kOCSpecRunnerNotificationgroupFinished";
 
 
+@interface OCSpecRunner ()
+@property (nonatomic, strong) NSMutableSet *runningResults;
+@property (nonatomic, strong) NSMutableSet *results;
+@end
+
 @implementation OCSpecRunner
 
 - (id) initWithExampleGroups:(NSArray *)someExampleGroups {
@@ -60,8 +65,9 @@ NSString *kOCSpecRunnerNotificationgroupFinished = @"kOCSpecRunnerNotificationgr
     return self;
 }
 
-- (NSMutableArray *) run {
-    NSMutableArray *results = [NSMutableArray new];
+- (NSSet *) run {
+    _runningResults = [NSMutableSet new];
+    _results = [NSMutableSet new];
 	NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"description" ascending:YES];
 	NSArray *sortedExampleGroupClasses = [self.exampleGroups sortedArrayUsingDescriptors:@[sortDescriptor]];
 
@@ -107,7 +113,7 @@ NSString *kOCSpecRunnerNotificationgroupFinished = @"kOCSpecRunnerNotificationgr
 					OCExampleResult *result = [OCExampleResult  withExample:example];
 					[group addResult:result];
 					group.currentResult = result;
-					[results addObject:result];
+					[_runningResults addObject:result];
 
 					
 					// Notifiy delegates we are about to being an example
@@ -190,12 +196,19 @@ NSString *kOCSpecRunnerNotificationgroupFinished = @"kOCSpecRunnerNotificationgr
             }
         }
 	}];
-    return results;
+	
+	
+	do {
+		[[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate dateWithTimeIntervalSinceNow:.01]];
+	} while ([_runningResults count] > 0);
+
+	
+    return _results;
 }
 
 - (void) deferResult:(OCExampleResult *)result untilDone:(void(^)())exampleBlock {
+	result.deferred = YES;
 	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-		result.deferred = YES;
 		@try {
 			exampleBlock();
 			result.success = YES;
@@ -220,6 +233,8 @@ NSString *kOCSpecRunnerNotificationgroupFinished = @"kOCSpecRunnerNotificationgr
 	if(_delegate && [_delegate respondsToSelector:@selector(exampleDidFinish:)]) {
 		[self.delegate exampleDidFinish:result];
 	}
+	[_results addObject:result];
+	[_runningResults removeObject:result];
 }
 
 

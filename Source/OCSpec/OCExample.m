@@ -19,7 +19,8 @@
 }
 
 - (NSString *) description {
-	return [NSString stringWithFormat:@"%@ %@",[super description],_name];
+//	return [NSString stringWithFormat:@"%@ %@",[super description],_name];
+	return _name;
 }
 
 - (NSIndexPath *) indexPath {

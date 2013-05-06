@@ -66,6 +66,7 @@
 		_valueLabel.lineBreakMode = NSLineBreakByWordWrapping;
 		_valueLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
 		_valueLabel.numberOfLines = 0;
+		_valueLabel.enabled = YES;
 		[self.contentView addSubview:_valueLabel];
 		
 	}

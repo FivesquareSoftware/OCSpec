@@ -55,5 +55,8 @@
 	return result;
 }
 
+- (NSString *) debugDescription {
+	return [NSString stringWithFormat:@"%@ %@",[super debugDescription],_example.name];
+}
 
 @end
