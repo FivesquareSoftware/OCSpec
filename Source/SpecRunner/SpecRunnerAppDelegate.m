@@ -43,53 +43,46 @@
 
 @implementation SpecRunnerAppDelegate
 
-@synthesize window=window_;
-@synthesize navigationController=navigationController_;
-@synthesize overlayView=overlayView_;
-@synthesize activityIndicator=activityIndicator_;
-@synthesize statusLabel = statusLabel_;
-@synthesize specResultsController=specResultsController_;
-@synthesize srunner=srunner_;
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {	  
 	
-	window_ = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+	_window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 
-	specResultsController_ = [[SpecRunnerSpecResultsController alloc] initWithStyle:UITableViewStylePlain];
-	navigationController_ = [[UINavigationController alloc] initWithRootViewController:specResultsController_];
-	navigationController_.navigationBar.barStyle = UIBarStyleBlack;
+	_specResultsController = [[SpecRunnerSpecResultsController alloc] initWithStyle:UITableViewStylePlain];
+	_navigationController = [[UINavigationController alloc] initWithRootViewController:_specResultsController];
+	_navigationController.navigationBar.barStyle = UIBarStyleBlack;
 
-	overlayView_ = [[UIView alloc] initWithFrame:window_.frame];
-	overlayView_.backgroundColor = [UIColor blackColor];
-	overlayView_.alpha = 0.f;
-	[window_ addSubview:overlayView_];
+	_overlayView = [[UIView alloc] initWithFrame:_window.frame];
+	_overlayView.backgroundColor = [UIColor blackColor];
+	_overlayView.alpha = 0.f;
+	[_window addSubview:_overlayView];
 	
-	activityIndicator_ = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-	activityIndicator_.hidden = YES;
-	activityIndicator_.center = navigationController_.view.center;
-	[window_ addSubview:activityIndicator_];
+	_activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+	_activityIndicator.hidden = YES;
+	_activityIndicator.center = _navigationController.view.center;
+	[_window addSubview:_activityIndicator];
 	
-	statusLabel_ = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, window_.bounds.size.width*.9, 32.f)];
-	statusLabel_.backgroundColor = [UIColor colorWithWhite:0 alpha:.65];
-	statusLabel_.layer.cornerRadius = 7.f;
-	statusLabel_.font = [UIFont boldSystemFontOfSize:17.f];
-//	statusLabel_.numberOfLines = 2;
-	statusLabel_.textColor = [UIColor whiteColor];
-	statusLabel_.textAlignment = NSTextAlignmentCenter;
-	statusLabel_.center = CGPointMake(CGRectGetMidX(window_.bounds), CGRectGetMaxY(window_.bounds)-statusLabel_.bounds.size.height);
-	[window_ addSubview:statusLabel_];
+	_statusLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, _window.bounds.size.width*.9, 32.f)];
+	_statusLabel.backgroundColor = [UIColor colorWithWhite:0 alpha:.65];
+	_statusLabel.layer.cornerRadius = 7.f;
+	_statusLabel.font = [UIFont boldSystemFontOfSize:17.f];
+//	_statusLabel.numberOfLines = 2;
+	_statusLabel.textColor = [UIColor whiteColor];
+	_statusLabel.textAlignment = NSTextAlignmentCenter;
+	_statusLabel.center = CGPointMake(CGRectGetMidX(_window.bounds), CGRectGetMaxY(_window.bounds)-_statusLabel.bounds.size.height);
+	[_window addSubview:_statusLabel];
 	
-	[window_ insertSubview:navigationController_.view belowSubview:overlayView_];
+	[_window insertSubview:_navigationController.view belowSubview:_overlayView];
 
-	window_.backgroundColor = [UIColor blackColor];
+	_window.backgroundColor = [UIColor blackColor];
 	
-	[window_ makeKeyAndVisible];
+	[_window makeKeyAndVisible];
 	
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(runningSpec:) name:kOCSpecRunnerNotificationExampleStarted object:nil];
 
-	srunner_ = [[OCSpecRunner alloc] initWithExampleGroups:[OCExampleGroup subclasses]];
-	self.srunner.delegate = specResultsController_;
+	_srunner = [[OCSpecRunner alloc] initWithExampleGroups:[OCExampleGroup subclasses]];
+	self.srunner.delegate = _specResultsController;
 	[self runSpecs:self];
 	
 	return NO;
@@ -110,24 +103,24 @@
 
 - (void) runningSpecs {
 	[UIView beginAnimations:nil context:nil];
-	[activityIndicator_ startAnimating];
-	overlayView_.alpha = 0.45f;
-	statusLabel_.alpha = 1.f;
+	[_activityIndicator startAnimating];
+	_overlayView.alpha = 0.45f;
+	_statusLabel.alpha = 1.f;
 	[UIView commitAnimations];
 }
 
 - (void) runningSpec:(NSNotification *)notification {
 	dispatch_async(dispatch_get_main_queue(), ^{
-		statusLabel_.text = [NSString stringWithFormat:@"-> %@",[[notification object] name]];
-		//	statusLabel_.text = [notification object];
+		_statusLabel.text = [NSString stringWithFormat:@"-> %@",[[notification object] name]];
+		//	_statusLabel.text = [notification object];
 	});
 }
 	
 - (void) stoppedSpecs {
 	[UIView beginAnimations:nil context:nil];
-	overlayView_.alpha = 0.f;
-	[activityIndicator_ stopAnimating];
-	statusLabel_.alpha = 0.f;
+	_overlayView.alpha = 0.f;
+	[_activityIndicator stopAnimating];
+	_statusLabel.alpha = 0.f;
 	[UIView commitAnimations];
 }
 

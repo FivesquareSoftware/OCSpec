@@ -51,11 +51,10 @@ enum  {
 #pragma mark - Properties
 
 
-@synthesize error=error_;
 
 - (void) setError:(NSException *)newError {
-	if(error_ != newError) {
-		error_ = newError;
+	if(_error != newError) {
+		_error = newError;
 		[self.tableView reloadData];
 	}
 }
