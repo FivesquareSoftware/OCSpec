@@ -281,6 +281,7 @@
 				GCC_PREFIX_HEADER = Source/OCSpec_Prefix.pch;
 				INSTALL_PATH = /usr/local/lib;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PRODUCT_NAME = OCSpec;
 				PUBLIC_HEADERS_FOLDER_PATH = ../Headers;
 			};
