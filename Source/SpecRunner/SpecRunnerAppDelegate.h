@@ -30,11 +30,12 @@
 
 
 #import <UIKit/UIKit.h>
+#import <MessageUI/MessageUI.h>
 
 @class SpecRunnerSpecResultsController;
 @class OCSpecRunner;
 
-@interface SpecRunnerAppDelegate : NSObject <UIApplicationDelegate> {
+@interface SpecRunnerAppDelegate : NSObject <UIApplicationDelegate,MFMailComposeViewControllerDelegate> {
 }
 
 @property (nonatomic, strong) UIWindow *window;
@@ -43,9 +44,10 @@
 @property (nonatomic, strong) UIActivityIndicatorView *activityIndicator;
 @property (nonatomic, strong) UILabel *statusLabel;
 @property (nonatomic, strong) SpecRunnerSpecResultsController *specResultsController;
-@property (nonatomic, strong) OCSpecRunner *srunner;
+@property (nonatomic, strong) OCSpecRunner *specRunner;
 
 
+- (void) emailResults:(id)sender;
 - (void) runSpecs:(id)sender;
 
 @end

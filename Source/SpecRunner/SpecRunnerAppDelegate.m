@@ -36,9 +36,6 @@
 #import <QuartzCore/QuartzCore.h>
 
 @interface SpecRunnerAppDelegate()
-- (void) runningSpecs;
-- (void) stoppedSpecs;
-- (void) runSpecsInAnotherThread;
 @end
 
 @implementation SpecRunnerAppDelegate
@@ -86,22 +83,23 @@
 	
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(runningSpec:) name:kOCSpecRunnerNotificationExampleStarted object:nil];
 
-	_srunner = [[OCSpecRunner alloc] initWithExampleGroups:[OCExampleGroup subclasses]];
-	self.srunner.delegate = _specResultsController;
+	_specRunner = [[OCSpecRunner alloc] initWithExampleGroups:[OCExampleGroup subclasses]];
+	self.specRunner.delegate = _specResultsController;
 	[self runSpecs:self];
 	
 	return NO;
 }
 
-- (void) runSpecs:(id)sender {
-	[self.specResultsController resetResultsData];
-	[self runningSpecs];
-	[NSThread detachNewThreadSelector:@selector(runSpecsInAnotherThread) toTarget:self withObject:nil];
-}
+
+
+// ========================================================================== //
+
+#pragma mark - Control
+
 
 - (void) runSpecsInAnotherThread {
 	@autoreleasepool {
-		[self.srunner run];
+		[self.specRunner run];
 		[self performSelectorOnMainThread:@selector(stoppedSpecs) withObject:nil waitUntilDone:NO];
 	}
 }
@@ -128,5 +126,46 @@
 	_statusLabel.alpha = 0.f;
 	[UIView commitAnimations];
 }
+
+
+// ========================================================================== //
+
+#pragma mark - Mail Compose Delegate
+
+
+
+
+// The mail compose view controller delegate method
+- (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error {
+    [_window.rootViewController dismissViewControllerAnimated:YES completion:nil];
+}
+
+
+
+// ========================================================================== //
+
+#pragma mark - Actions
+
+
+- (void) emailResults:(id)sender {
+	if ([MFMailComposeViewController canSendMail]) {
+		MFMailComposeViewController *mailComposer = [[MFMailComposeViewController alloc] init];
+		mailComposer.mailComposeDelegate = self;
+		
+		[mailComposer setSubject:@"<Name> spec results"];
+		NSString *results = [self.specRunner toHTML];
+		[mailComposer setMessageBody:results isHTML:YES];
+		[_window.rootViewController presentViewController:mailComposer animated:YES completion:nil];
+	}
+}
+
+- (void) runSpecs:(id)sender {
+	[self.specResultsController resetResultsData];
+	[self runningSpecs];
+	[NSThread detachNewThreadSelector:@selector(runSpecsInAnotherThread) toTarget:self withObject:nil];
+}
+
+
+
 
 @end

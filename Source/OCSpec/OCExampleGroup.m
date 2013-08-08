@@ -105,5 +105,12 @@
 	[self.results addObject:aResult];
 }
 
+- (NSString *) toHTML {
+	NSMutableString *resultsString = [NSMutableString new];
+	for (OCExampleResult *result in self.results) {
+		[resultsString appendFormat:@"%@",[result toHTML]];
+	}
+	return resultsString;
+}
 
 @end

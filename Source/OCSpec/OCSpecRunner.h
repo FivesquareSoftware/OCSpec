@@ -60,11 +60,14 @@ extern NSString *kOCSpecRunnerNotificationgroupFinished;
 @interface OCSpecRunner : NSObject
 
 @property (nonatomic, strong) NSArray *exampleGroups;
+@property (nonatomic, strong) NSMutableArray *exampleGroupInstances;
 @property (nonatomic, weak) id<OCSpecRunnerDelegate> delegate;
 
 - (id) initWithExampleGroups:(NSArray *)someExampleGroups;
 
 - (NSSet *) run;
 - (void) deferResult:(OCExampleResult *)result untilDone:(void(^)())exampleBlock;
+
+- (NSString *) toHTML;
 
 @end

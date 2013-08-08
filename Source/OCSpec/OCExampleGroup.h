@@ -66,6 +66,8 @@
 - (NSUInteger) indexOfResult:(OCExampleResult *)result;
 - (void) addResult:(OCExampleResult *)aResult;
 
+- (NSString *) toHTML;
+
 @end
 
 

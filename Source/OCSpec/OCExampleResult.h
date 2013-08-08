@@ -47,4 +47,6 @@
 
 + (id) withExample:(OCExample *)example;
 
+- (NSString *) toHTML;
+
 @end

@@ -59,4 +59,28 @@
 	return [NSString stringWithFormat:@"%@ %@",[super debugDescription],_example.name];
 }
 
+- (NSString *) toHTML {
+
+	NSMutableString *string = [NSMutableString new];
+	[string appendFormat:@"<h4>%@</h4>",self.example.name];
+	
+	[string appendString:@"<ul>"];
+	
+	[string appendFormat:@"<li>Context: %@</li>",self.context];
+	[string appendFormat:@"<li>Elapsed: %@</li>",[NSString stringWithFormat:@"%.2fs",self.elapsed]];
+	[string appendFormat:@"<li>Status: <span style=\"color: %@\">%@</span></li>",(self.success ? @"green" : @"red"),(self.success ? @"Success" : @"Fail")];
+	if (self.error) {
+		[string appendFormat:@"<li>Error: %@",self.error.name];
+		[string appendString:@"<ul>"];
+		[string appendFormat:@"<li>Reason: %@</li>",self.error.reason];
+		[string appendFormat:@"<li>Info: %@</li>",self.error.userInfo];
+		[string appendFormat:@"<li>Trace: <pre>%@</pre></li>",[[self.error callStackSymbols] description]];
+		[string appendString:@"</ul></li>"];
+	}
+
+	[string appendString:@"</ul>"];
+
+	return string;
+}
+
 @end

@@ -107,6 +107,10 @@ static NSString *kExampleSectionHeaderViewIdentifier = @"kExampleSectionHeaderVi
 	
 	self.title = @"Spec Results";
 	
+	
+	UIBarButtonItem *emailButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:[[UIApplication sharedApplication] delegate] action:@selector(emailResults:)];
+	self.navigationItem.leftBarButtonItem = emailButton;
+	
 	UIBarButtonItem *runButton = [[UIBarButtonItem alloc] initWithTitle:@"Run" style:UIBarButtonItemStyleBordered target:[[UIApplication sharedApplication] delegate] action:@selector(runSpecs:)];
 	self.navigationItem.rightBarButtonItem = runButton;
 		

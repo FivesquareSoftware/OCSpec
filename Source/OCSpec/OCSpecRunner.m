@@ -72,6 +72,7 @@ NSString *kOCSpecRunnerNotificationgroupFinished = @"kOCSpecRunnerNotificationgr
 	NSArray *sortedExampleGroupClasses = [self.exampleGroups sortedArrayUsingDescriptors:@[sortDescriptor]];
 
 	// Loops the groups
+	_exampleGroupInstances = [NSMutableArray new];
 	[sortedExampleGroupClasses enumerateObjectsUsingBlock:^(Class groupClass, NSUInteger idx, BOOL *stop) {
         NSLog(@"Running example group: %@",groupClass);
         OCExampleGroup *group;
@@ -79,6 +80,7 @@ NSString *kOCSpecRunnerNotificationgroupFinished = @"kOCSpecRunnerNotificationgr
             group = [groupClass new];
 			group.index = idx;
 			group.specRunner = self;
+			[_exampleGroupInstances addObject:group];
 			
 			// Notify delegates group will start
 			if ([_delegate respondsToSelector:@selector(exampleGroupDidStart:)]) {
@@ -237,6 +239,19 @@ NSString *kOCSpecRunnerNotificationgroupFinished = @"kOCSpecRunnerNotificationgr
 	[_runningResults removeObject:result];
 }
 
+
+- (NSString *) toHTML {
+	NSMutableString *resultsString = [NSMutableString new];
+	NSString *groupSeparator = @"<hr/>";
+	for (OCExampleGroup *group in self.exampleGroupInstances) {
+		[resultsString appendFormat:@"<div><h3>%@</h3>%@",[[group class] description],groupSeparator];
+		[resultsString appendString:[group toHTML]];
+		[resultsString appendString:@"</div>"];
+	}
+	
+	NSMutableString *documentString = [[NSMutableString alloc] initWithFormat:@"<html><head><title>Spec Results</title></head><body>%@</body></html>",resultsString];
+	return documentString;
+}
 
 @end
 
