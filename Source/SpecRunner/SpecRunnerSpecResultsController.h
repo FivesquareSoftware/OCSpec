@@ -37,9 +37,6 @@
 
 @interface SpecRunnerSpecResultsController : UITableViewController<OCSpecRunnerDelegate>
 
-@property (nonatomic, strong) UIView *headerView;
-@property (nonatomic, strong) UILabel *headerLabel;
-
 - (void) resetResultsData;
 - (BOOL) hasResults;
 

@@ -97,6 +97,10 @@
 	return [self.results objectAtIndex:index];
 }
 
+- (NSUInteger) indexOfResult:(OCExampleResult *)result {
+	return [self.results indexOfObject:result];
+}
+
 - (void) addResult:(OCExampleResult *)aResult {
 	[self.results addObject:aResult];
 }

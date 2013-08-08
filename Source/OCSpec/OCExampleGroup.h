@@ -63,6 +63,7 @@
 
 - (NSUInteger) numberOfResults;
 - (OCExampleResult *) resultAtIndex:(NSUInteger)index;
+- (NSUInteger) indexOfResult:(OCExampleResult *)result;
 - (void) addResult:(OCExampleResult *)aResult;
 
 @end

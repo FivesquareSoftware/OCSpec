@@ -15,6 +15,10 @@
 		29995B78131F1C0200E6C4D6 /* OCSpecRunner.h in Headers */ = {isa = PBXBuildFile; fileRef = 29995B56131F1C0200E6C4D6 /* OCSpecRunner.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		29995B79131F1C0200E6C4D6 /* OCSpecRunner.m in Sources */ = {isa = PBXBuildFile; fileRef = 29995B57131F1C0200E6C4D6 /* OCSpecRunner.m */; };
 		29995B7A131F1C0200E6C4D6 /* OCSpec_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 29995B58131F1C0200E6C4D6 /* OCSpec_Prefix.pch */; };
+		A408CA6017B2B30B00B75AF8 /* SpecRunnerStatusImage.h in Headers */ = {isa = PBXBuildFile; fileRef = A408CA5E17B2B30B00B75AF8 /* SpecRunnerStatusImage.h */; };
+		A408CA6117B2B30B00B75AF8 /* SpecRunnerStatusImage.m in Sources */ = {isa = PBXBuildFile; fileRef = A408CA5F17B2B30B00B75AF8 /* SpecRunnerStatusImage.m */; };
+		A408CA6417B2BD8500B75AF8 /* SpecRunnerExampleGroupHeader.h in Headers */ = {isa = PBXBuildFile; fileRef = A408CA6217B2BD8500B75AF8 /* SpecRunnerExampleGroupHeader.h */; };
+		A408CA6517B2BD8500B75AF8 /* SpecRunnerExampleGroupHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = A408CA6317B2BD8500B75AF8 /* SpecRunnerExampleGroupHeader.m */; };
 		A4626A6D1419922D005544D6 /* SpecRunnerAppDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = A4626A5D1419922D005544D6 /* SpecRunnerAppDelegate.h */; };
 		A4626A6E1419922D005544D6 /* SpecRunnerAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A4626A5E1419922D005544D6 /* SpecRunnerAppDelegate.m */; };
 		A4626A6F1419922D005544D6 /* SpecRunnerExampleResultCell.h in Headers */ = {isa = PBXBuildFile; fileRef = A4626A5F1419922D005544D6 /* SpecRunnerExampleResultCell.h */; };
@@ -41,6 +45,10 @@
 		29995B56131F1C0200E6C4D6 /* OCSpecRunner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCSpecRunner.h; sourceTree = "<group>"; };
 		29995B57131F1C0200E6C4D6 /* OCSpecRunner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCSpecRunner.m; sourceTree = "<group>"; };
 		29995B58131F1C0200E6C4D6 /* OCSpec_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCSpec_Prefix.pch; sourceTree = "<group>"; };
+		A408CA5E17B2B30B00B75AF8 /* SpecRunnerStatusImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpecRunnerStatusImage.h; sourceTree = "<group>"; };
+		A408CA5F17B2B30B00B75AF8 /* SpecRunnerStatusImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpecRunnerStatusImage.m; sourceTree = "<group>"; };
+		A408CA6217B2BD8500B75AF8 /* SpecRunnerExampleGroupHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpecRunnerExampleGroupHeader.h; sourceTree = "<group>"; };
+		A408CA6317B2BD8500B75AF8 /* SpecRunnerExampleGroupHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpecRunnerExampleGroupHeader.m; sourceTree = "<group>"; };
 		A4626A5D1419922D005544D6 /* SpecRunnerAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpecRunnerAppDelegate.h; sourceTree = "<group>"; };
 		A4626A5E1419922D005544D6 /* SpecRunnerAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpecRunnerAppDelegate.m; sourceTree = "<group>"; };
 		A4626A5F1419922D005544D6 /* SpecRunnerExampleResultCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpecRunnerExampleResultCell.h; sourceTree = "<group>"; };
@@ -130,8 +138,12 @@
 				A4626A5E1419922D005544D6 /* SpecRunnerAppDelegate.m */,
 				A4626A691419922D005544D6 /* SpecRunnerSpecResultsController.h */,
 				A4626A6A1419922D005544D6 /* SpecRunnerSpecResultsController.m */,
+				A408CA6217B2BD8500B75AF8 /* SpecRunnerExampleGroupHeader.h */,
+				A408CA6317B2BD8500B75AF8 /* SpecRunnerExampleGroupHeader.m */,
 				A4626A5F1419922D005544D6 /* SpecRunnerExampleResultCell.h */,
 				A4626A601419922D005544D6 /* SpecRunnerExampleResultCell.m */,
+				A408CA5E17B2B30B00B75AF8 /* SpecRunnerStatusImage.h */,
+				A408CA5F17B2B30B00B75AF8 /* SpecRunnerStatusImage.m */,
 				A4626A631419922D005544D6 /* SpecRunnerLabelValueCell.h */,
 				A4626A641419922D005544D6 /* SpecRunnerLabelValueCell.m */,
 				A4626A651419922D005544D6 /* SpecRunnerSpecResultDetailsController.h */,
@@ -152,6 +164,7 @@
 				29995B73131F1C0200E6C4D6 /* OCExampleGroup.h in Headers */,
 				29995B75131F1C0200E6C4D6 /* OCExampleResult.h in Headers */,
 				29995B77131F1C0200E6C4D6 /* OCSpec.h in Headers */,
+				A408CA6017B2B30B00B75AF8 /* SpecRunnerStatusImage.h in Headers */,
 				29995B78131F1C0200E6C4D6 /* OCSpecRunner.h in Headers */,
 				29995B7A131F1C0200E6C4D6 /* OCSpec_Prefix.pch in Headers */,
 				A4626A6D1419922D005544D6 /* SpecRunnerAppDelegate.h in Headers */,
@@ -161,6 +174,7 @@
 				A4626A771419922D005544D6 /* SpecRunnerSpecResultErrorDetailsController.h in Headers */,
 				A4626A791419922D005544D6 /* SpecRunnerSpecResultsController.h in Headers */,
 				A4B1263E173180D400F06139 /* OCExample.h in Headers */,
+				A408CA6417B2BD8500B75AF8 /* SpecRunnerExampleGroupHeader.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -189,6 +203,8 @@
 /* Begin PBXProject section */
 		0867D690FE84028FC02AAC07 /* Project object */ = {
 			isa = PBXProject;
+			attributes = {
+			};
 			buildConfigurationList = 1DEB922208733DC00010E9CD /* Build configuration list for PBXProject "OCSpec" */;
 			compatibilityVersion = "Xcode 3.1";
 			developmentRegion = English;
@@ -218,12 +234,14 @@
 				29995B76131F1C0200E6C4D6 /* OCExampleResult.m in Sources */,
 				29995B79131F1C0200E6C4D6 /* OCSpecRunner.m in Sources */,
 				A4626A6E1419922D005544D6 /* SpecRunnerAppDelegate.m in Sources */,
+				A408CA6517B2BD8500B75AF8 /* SpecRunnerExampleGroupHeader.m in Sources */,
 				A4626A701419922D005544D6 /* SpecRunnerExampleResultCell.m in Sources */,
 				A4626A741419922D005544D6 /* SpecRunnerLabelValueCell.m in Sources */,
 				A4626A761419922D005544D6 /* SpecRunnerSpecResultDetailsController.m in Sources */,
 				A4626A781419922D005544D6 /* SpecRunnerSpecResultErrorDetailsController.m in Sources */,
 				A4626A7A1419922D005544D6 /* SpecRunnerSpecResultsController.m in Sources */,
 				A4B1263F173180D400F06139 /* OCExample.m in Sources */,
+				A408CA6117B2B30B00B75AF8 /* SpecRunnerStatusImage.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -245,6 +263,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Source/OCSpec_Prefix.pch;
 				INSTALL_PATH = /usr/local/lib;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = OCSpec;
 				PUBLIC_HEADERS_FOLDER_PATH = ../Headers;
 			};
@@ -261,6 +280,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Source/OCSpec_Prefix.pch;
 				INSTALL_PATH = /usr/local/lib;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = OCSpec;
 				PUBLIC_HEADERS_FOLDER_PATH = ../Headers;
 			};

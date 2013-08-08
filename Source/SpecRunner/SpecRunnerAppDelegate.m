@@ -53,15 +53,17 @@
 	_navigationController = [[UINavigationController alloc] initWithRootViewController:_specResultsController];
 	_navigationController.navigationBar.barStyle = UIBarStyleBlack;
 
+	_window.rootViewController = _navigationController;
+
 	_overlayView = [[UIView alloc] initWithFrame:_window.frame];
 	_overlayView.backgroundColor = [UIColor blackColor];
 	_overlayView.alpha = 0.f;
-	[_window addSubview:_overlayView];
+	[_navigationController.view addSubview:_overlayView];
 	
 	_activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
 	_activityIndicator.hidden = YES;
 	_activityIndicator.center = _navigationController.view.center;
-	[_window addSubview:_activityIndicator];
+	[_navigationController.view addSubview:_activityIndicator];
 	
 	_statusLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, _window.bounds.size.width*.9, 32.f)];
 	_statusLabel.backgroundColor = [UIColor colorWithWhite:0 alpha:.65];
@@ -71,11 +73,14 @@
 	_statusLabel.textColor = [UIColor whiteColor];
 	_statusLabel.textAlignment = NSTextAlignmentCenter;
 	_statusLabel.center = CGPointMake(CGRectGetMidX(_window.bounds), CGRectGetMaxY(_window.bounds)-_statusLabel.bounds.size.height);
-	[_window addSubview:_statusLabel];
+	[_navigationController.view addSubview:_statusLabel];
 	
-	[_window insertSubview:_navigationController.view belowSubview:_overlayView];
+//	[_window insertSubview:_navigationController.view belowSubview:_overlayView];
 
 	_window.backgroundColor = [UIColor blackColor];
+	if ([_window respondsToSelector:@selector(setTintColor:)]) {
+		_window.tintColor = [UIColor whiteColor];
+	}
 	
 	[_window makeKeyAndVisible];
 	

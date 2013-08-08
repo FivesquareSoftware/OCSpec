@@ -6,7 +6,7 @@
 //	Copyright 2008 Fivesquare Software, LLC. All rights reserved.
 //
 
-/* 
+/*
  Permission is hereby granted, free of charge, to any person
  obtaining a copy of this software and associated documentation
  files (the "Software"), to deal in the Software without
@@ -15,10 +15,10 @@
  copies of the Software, and to permit persons to whom the
  Software is furnished to do so, subject to the following
  conditions:
-
+ 
  The above copyright notice and this permission notice shall be
  included in all copies or substantial portions of the Software.
-
+ 
  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
  EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
  OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,16 +34,20 @@
 #import "SpecRunnerAppDelegate.h"
 #import "SpecRunnerExampleResultCell.h"
 #import "SpecRunnerSpecResultDetailsController.h"
+#import "SpecRunnerExampleGroupHeader.h"
 
 //#import	 "SpecRunnerGroupResults.h"
 #import "OCSpec.h"
 
 
 static NSString *kExampleResultCellIdentifier = @"kExampleResultCellIdentifier";
+static NSString *kExampleSectionHeaderViewIdentifier = @"kExampleSectionHeaderViewIdentifier";
+#define kSpecResultsControllerTableHeaderHeight 22.f
 
 
 @interface SpecRunnerSpecResultsController()
-@property (nonatomic, strong) NSMutableSet *groups;
+@property (nonatomic, strong) NSMutableArray *groups;
+@property (nonatomic, strong) NSMutableDictionary *resultsByGroup;
 @property (nonatomic, readonly) BOOL hasResults;
 @end
 
@@ -69,7 +73,8 @@ static NSString *kExampleResultCellIdentifier = @"kExampleResultCellIdentifier";
 
 - (void) initialize {
 	// Initialization code
-	_groups = [NSMutableSet new];
+	_groups = [NSMutableArray new];
+	_resultsByGroup = [NSMutableDictionary new];
 }
 
 
@@ -97,26 +102,20 @@ static NSString *kExampleResultCellIdentifier = @"kExampleResultCellIdentifier";
 
 #pragma mark - View Controller
 
-- (void) viewDidLoad {	  
+- (void) viewDidLoad {
 	[super viewDidLoad];
 	
 	self.title = @"Spec Results";
 	
 	UIBarButtonItem *runButton = [[UIBarButtonItem alloc] initWithTitle:@"Run" style:UIBarButtonItemStyleBordered target:[[UIApplication sharedApplication] delegate] action:@selector(runSpecs:)];
 	self.navigationItem.rightBarButtonItem = runButton;
-	
-	_headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320.f, 25.f)];
-	_headerView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-	_headerView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:.50];
-	
-	_headerLabel = [[UILabel alloc] initWithFrame:CGRectMake(12.f, 0, 302.f, 25.f)];
-	_headerLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-	_headerLabel.textColor = [UIColor whiteColor];
-	
+		
 	self.tableView.dataSource = self;
 	self.tableView.delegate = self;
 	
 	[self.tableView registerClass:[SpecRunnerExampleResultCell class] forCellReuseIdentifier:kExampleResultCellIdentifier];
+	[self.tableView registerClass:[SpecRunnerExampleGroupHeader class] forHeaderFooterViewReuseIdentifier:kExampleSectionHeaderViewIdentifier];
+	self.tableView.sectionHeaderHeight = kSpecResultsControllerTableHeaderHeight;
 }
 
 - (void) viewWillAppear:(BOOL)animated {
@@ -159,11 +158,8 @@ static NSString *kExampleResultCellIdentifier = @"kExampleResultCellIdentifier";
 }
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-	NSUInteger count = 0;
-	if([self hasResults]) {
-		OCExampleGroup *group = [self groupAtIndex:section];
-		 count = [group numberOfResults];
-	}
+	NSMutableArray *results = [self resultsForSection:section];
+	NSUInteger count = [results count];
 	return count;
 }
 
@@ -184,32 +180,23 @@ static NSString *kExampleResultCellIdentifier = @"kExampleResultCellIdentifier";
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	OCExampleResult *resultAtIndex = [self resultAtIndexPath:indexPath];
-
+	
 	SpecRunnerSpecResultDetailsController *detailViewController = [[SpecRunnerSpecResultDetailsController alloc] initWithStyle:UITableViewStylePlain];
 	detailViewController.result = resultAtIndex;
 	[self.navigationController pushViewController:detailViewController animated:YES];
 }
 
 - (UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-	if([self hasResults]) {
-		UIView *hview = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320.0, 22.0)];
-		hview.autoresizingMask = UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleWidth;
-		hview.backgroundColor = [UIColor blackColor];
-		hview.alpha = 0.5;
-		UILabel *aLabel = [[UILabel alloc] initWithFrame:CGRectMake(12.0, 0, 308.0, 22.0)];
-		aLabel.autoresizingMask = UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleWidth;
-		aLabel.opaque = NO;
-		aLabel.backgroundColor = [UIColor clearColor];
-		aLabel.font = [UIFont boldSystemFontOfSize:14.0];
-		aLabel.textAlignment = NSTextAlignmentLeft;
-		aLabel.textColor = [UIColor whiteColor]; 
-		aLabel.text = [[[self groupAtIndex:section] class] description];
-		[hview addSubview:aLabel];
-		return hview;
+	SpecRunnerExampleGroupHeader *headerView;
+	if ([self.tableView respondsToSelector:@selector(dequeueReusableHeaderFooterViewWithIdentifier:)]) {
+		headerView = [self.tableView dequeueReusableHeaderFooterViewWithIdentifier:kExampleSectionHeaderViewIdentifier];
 	}
-	return nil;
+	else {
+		headerView = [[SpecRunnerExampleGroupHeader alloc] initWithFrame:CGRectMake(0, 0, self.tableView.bounds.size.width, self.tableView.sectionHeaderHeight)];
+	}
+	headerView.textLabel.text = [[[_groups objectAtIndex:section] class] description];
+	return headerView;
 }
-
 
 
 
@@ -229,88 +216,112 @@ static NSString *kExampleResultCellIdentifier = @"kExampleResultCellIdentifier";
 - (void) exampleDidFinish:(OCExampleResult *)result {
 	[self reloadResult:result];
 }
-	 
+
 - (void) exampleGroupDidFailWithError:(NSError *)error {
 	
 	NSDictionary *errorInfo = [error userInfo];
 	Class group = [errorInfo objectForKey:kOCErrorInfoKeyGroup];
-//	  NSString *msg = [errorInfo objectForKey:kOCErrorInfoKeyMessage];
+	//	  NSString *msg = [errorInfo objectForKey:kOCErrorInfoKeyMessage];
 	
 	NSString *alertMsg = [NSString stringWithFormat:@"Could not run group '%@'",group];
 	
-	UIAlertView *alert = [[UIAlertView alloc] 
-						  initWithTitle:@"Spec Error" 
-						  message:alertMsg 
-						  delegate:self 
-						  cancelButtonTitle:@"OK" 
+	UIAlertView *alert = [[UIAlertView alloc]
+						  initWithTitle:@"Spec Error"
+						  message:alertMsg
+						  delegate:self
+						  cancelButtonTitle:@"OK"
 						  otherButtonTitles:nil];
 	[alert show];
 }
-	 
+
 
 // ========================================================================== //
 
 #pragma mark - Model Access
 
 - (void) resetResultsData {
-	[self.groups removeAllObjects];
+	[_groups removeAllObjects];
+	[_resultsByGroup removeAllObjects];
 	[self.tableView reloadData];
 }
 
-- (OCExampleGroup *) groupAtIndex:(NSUInteger)index {
-	NSSet *objects = [_groups objectsPassingTest:^BOOL(OCExampleGroup *obj, BOOL *stop) {
-		return obj.index == index;
-	}];
-	OCExampleGroup *group = [objects anyObject];
-	return group;
+- (NSMutableArray *) resultsForSection:(NSUInteger)section {
+	NSMutableArray *results = nil;
+	if (section < [_groups count]) {
+		OCExampleGroup *group = [_groups objectAtIndex:section];
+		results = [self resultsForGroup:group];
+	}
+	return results;
+}
+
+- (NSMutableArray *) resultsForGroup:(OCExampleGroup *)group {
+	NSString *key = [[group class] description];
+	NSMutableArray *results = _resultsByGroup[key];
+	if (results == nil) {
+		results = [NSMutableArray new];
+		_resultsByGroup[key] = results;
+	}
+	return results;
 }
 
 - (OCExampleResult *) resultAtIndexPath:(NSIndexPath *)indexPath {
-	OCExampleGroup *group = [self groupAtIndex:indexPath.section];
-	return [group resultAtIndex:indexPath.row];
+	OCExampleResult *result = nil;
+	OCExampleGroup *group = [_groups objectAtIndex:indexPath.section];
+	if (group) {
+		NSMutableArray *results = [self resultsForGroup:group];
+		if ([results count] > indexPath.row ) {
+			result = results[indexPath.row];
+		}
+	}
+	return result;
+}
+
+- (NSIndexPath *) indexPathOfResult:(OCExampleResult *)result {
+	OCExampleGroup *group = result.example.group;
+	NSUInteger sectionIndex = [_groups indexOfObject:group];
+	NSIndexPath *indexPath = nil;
+	if (sectionIndex != NSNotFound) {
+		NSUInteger resultIndex = [[self resultsForGroup:group] indexOfObject:result];
+		if (resultIndex != NSNotFound) {
+			indexPath = [NSIndexPath indexPathForRow:resultIndex inSection:sectionIndex];
+		}
+	}
+	return indexPath;
 }
 
 - (void) insertGroup:(OCExampleGroup *)group {
 	dispatch_async(dispatch_get_main_queue(), ^{
-//		NSInteger numberOfSections = [self.tableView numberOfSections];
+		NSUInteger sectionIndex = [_groups count];
 		[_groups addObject:group];
-//		if (group.index >= numberOfSections) {
-//			NSIndexSet *indexSet = [NSIndexSet indexSetWithIndex:group.index];
-//			[self.tableView beginUpdates];
-//			[self.tableView insertSections:indexSet withRowAnimation:UITableViewRowAnimationNone];
-//			[self.tableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationAutomatic];
-//			[self.tableView endUpdates];
-//		}
-		[self.tableView reloadData];
+		NSIndexSet *indexSet = [NSIndexSet indexSetWithIndex:sectionIndex];
+		[self.tableView beginUpdates];
+		[self.tableView insertSections:indexSet withRowAnimation:UITableViewRowAnimationNone];
+		[self.tableView endUpdates];
 	});
 }
 
 - (void) insertResult:(OCExampleResult *)result {
 	dispatch_async(dispatch_get_main_queue(), ^{
-//		NSIndexPath *indexPath = result.example.indexPath;
-//		NSInteger numberOfRows = [self.tableView numberOfRowsInSection:indexPath.section];
-//		if (indexPath.row >= numberOfRows) {
-//			[self.tableView beginUpdates];
-//			[self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationBottom];
-//			[self.tableView endUpdates];
-//			[self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
-//		}
-//		NSIndexPath *indexPath = result.example.indexPath;
-//		[self.tableView beginUpdates];
-//		[self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-//		[self.tableView endUpdates];
-		[self.tableView reloadData];
+		NSMutableArray *results = [self resultsForGroup:result.example.group];
+		[results addObject:result];
+		NSIndexPath *indexPath = [self indexPathOfResult:result];
+		if (indexPath) {
+			[self.tableView beginUpdates];
+			[self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationBottom];
+			[self.tableView endUpdates];
+			[self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+		}
 	});
 }
 
 - (void) reloadResult:(OCExampleResult *)result {
 	dispatch_async(dispatch_get_main_queue(), ^{
-		NSIndexPath *indexPath = result.example.indexPath;
-//		[self.tableView beginUpdates];
-//		[self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-//		[self.tableView endUpdates];
-		[self.tableView reloadData];
-		[self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+		NSIndexPath *indexPath = [self indexPathOfResult:result];
+		if (indexPath) {
+			[self.tableView beginUpdates];
+			[self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+			[self.tableView endUpdates];
+		}
 	});
 }
 

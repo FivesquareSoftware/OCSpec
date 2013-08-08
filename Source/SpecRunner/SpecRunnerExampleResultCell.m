@@ -32,10 +32,10 @@
 
 
 #import <CoreGraphics/CoreGraphics.h>
-
+#import "SpecRunnerStatusImage.h"
 
 @interface SpecRunnerExampleResultCell()
-@property (nonatomic, strong) UIImage *statusImage;
+//@property (nonatomic, strong) UIImage *statusImage;
 @end
 
 
@@ -67,35 +67,9 @@
 	}
 	self.textLabel.text = _result.example.name;
 	self.detailTextLabel.text = [_result.context description];
-	_statusImage = [self statusImageForResult:self.result];
-	self.imageView.image = self.statusImage;
-}
-
-- (UIImage *) statusImageForResult:(OCExampleResult *)aResult {
-	
-	CGRect imageViewRect = CGRectMake(0, 0, self.frame.size.height, self.frame.size.height);
-	UIGraphicsBeginImageContext(imageViewRect.size);
-	CGContextRef context = UIGraphicsGetCurrentContext();
-	
-	CGPoint imageViewCenter = CGPointMake(CGRectGetMidX(imageViewRect), CGRectGetMidY(imageViewRect));
-	CGRect imageRect = CGRectMake(imageViewCenter.x - 6.f, imageViewCenter.y - 6.f, 12.f, 12.f);
-
-	
-	UIColor *dotColor;
-	if (_result.isRunning) {
-		dotColor = [UIColor orangeColor];
-	}
-	else {
-		dotColor = _result.success ? [UIColor greenColor] : [UIColor redColor];
-	}
-	CGContextSetFillColorWithColor(context, dotColor.CGColor);
-	CGContextFillEllipseInRect(context, imageRect);
-
-	UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
-	
-	UIGraphicsEndImageContext();
-	
-	return image;
+	SpecRunnerStatus status = result.isRunning ? SpecRunnerStatusRunning : (result.success ? SpecRunnerStatusSuccess : SpecRunnerStatusFailure);
+	UIImage *statusImage = [SpecRunnerStatusImage statusImageForStatus:status inRect:CGRectMake(0, 0, self.bounds.size.height, self.bounds.size.height)];
+	self.imageView.image = statusImage;
 }
 
 @end
