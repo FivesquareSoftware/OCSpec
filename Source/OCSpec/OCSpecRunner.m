@@ -146,6 +146,8 @@ NSString *kOCSpecRunnerNotificationgroupFinished = @"kOCSpecRunnerNotificationgr
 						result.success = NO;
                     }
                     @finally {
+						NSLog(@"%@",result.isDeferred ? @"[䷄] DEFERRED" : (result.success ? @"[✓] PASS" : @"[X] FAIL"));
+						
 						// An example may actually defer reporting its result state (possibly because it needs to hop off on another thread to wait for a result), if it is done, complete it here
 						if (NO == result.isDeferred) {
 							[self completeResult:result];
@@ -224,6 +226,7 @@ NSString *kOCSpecRunnerNotificationgroupFinished = @"kOCSpecRunnerNotificationgr
 			result.success = NO;
 		}
 		@finally {
+			NSLog(@"Deferred result: %@ .... %@",result.example.name, (result.success ? @"PASS" : @"FAIL"));
 			[self completeResult:result];
 		}
 	});

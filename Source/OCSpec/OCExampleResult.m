@@ -68,7 +68,8 @@
 	
 	[string appendFormat:@"<li>Context: %@</li>",self.context];
 	[string appendFormat:@"<li>Elapsed: %@</li>",[NSString stringWithFormat:@"%.2fs",self.elapsed]];
-	[string appendFormat:@"<li>Status: <span style=\"color: %@\">%@</span></li>",(self.success ? @"green" : @"red"),(self.success ? @"Success" : @"Fail")];
+	NSString *statusString = self.success ?  @"[✓] PASS" : @"[X] FAIL";
+	[string appendFormat:@"<li>Status: <span style=\"color: %@\">%@</span></li>",(self.success ? @"green" : @"red"),statusString];
 	if (self.error) {
 		[string appendFormat:@"<li>Error: %@",self.error.name];
 		[string appendString:@"<ul>"];
