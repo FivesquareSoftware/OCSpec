@@ -114,7 +114,7 @@
 
 - (void) runningSpec:(NSNotification *)notification {
 	dispatch_async(dispatch_get_main_queue(), ^{
-		_statusLabel.text = [NSString stringWithFormat:@"-> %@",[[notification object] name]];
+		self.statusLabel.text = [NSString stringWithFormat:@"-> %@",[[notification object] name]];
 		//	_statusLabel.text = [notification object];
 	});
 }

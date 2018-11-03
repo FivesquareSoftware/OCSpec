@@ -78,7 +78,8 @@
 	CGSize fitSize = [super sizeThatFits:size];
 	
 	CGSize maxValueSize = CGSizeMake(_valueLabel.frame.size.width, 1000.f);
-	CGSize valueSize = [_valueLabel.text sizeWithFont:_valueLabel.font constrainedToSize:maxValueSize lineBreakMode:_valueLabel.lineBreakMode];
+	NSDictionary *atts = @{ NSFontAttributeName : self.valueLabel.font };
+	CGSize valueSize = [_valueLabel.text boundingRectWithSize:maxValueSize options:0 attributes:atts context:nil].size;
 	
 	CGFloat labelHeight = valueSize.height > kSpecRunnerLabelValueCellLabelHeight ? valueSize.height : kSpecRunnerLabelValueCellLabelHeight;
 	

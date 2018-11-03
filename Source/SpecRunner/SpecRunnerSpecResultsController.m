@@ -111,7 +111,7 @@ static NSString *kExampleSectionHeaderViewIdentifier = @"kExampleSectionHeaderVi
 	UIBarButtonItem *emailButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:[[UIApplication sharedApplication] delegate] action:@selector(emailResults:)];
 	self.navigationItem.leftBarButtonItem = emailButton;
 	
-	UIBarButtonItem *runButton = [[UIBarButtonItem alloc] initWithTitle:@"Run" style:UIBarButtonItemStyleBordered target:[[UIApplication sharedApplication] delegate] action:@selector(runSpecs:)];
+	UIBarButtonItem *runButton = [[UIBarButtonItem alloc] initWithTitle:@"Run" style:UIBarButtonItemStylePlain target:[[UIApplication sharedApplication] delegate] action:@selector(runSpecs:)];
 	self.navigationItem.rightBarButtonItem = runButton;
 		
 	self.tableView.dataSource = self;
@@ -146,7 +146,11 @@ static NSString *kExampleSectionHeaderViewIdentifier = @"kExampleSectionHeaderVi
 	[super setEditing:editing animated:animate];
 }
 
-- (BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation {
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
+	return UIInterfaceOrientationMaskAll;
+}
+
+- (BOOL)shouldAutorotate {
 	return YES;
 }
 
@@ -295,8 +299,8 @@ static NSString *kExampleSectionHeaderViewIdentifier = @"kExampleSectionHeaderVi
 
 - (void) insertGroup:(OCExampleGroup *)group {
 	dispatch_async(dispatch_get_main_queue(), ^{
-		NSUInteger sectionIndex = [_groups count];
-		[_groups addObject:group];
+		NSUInteger sectionIndex = [self.groups count];
+		[self.groups addObject:group];
 		NSIndexSet *indexSet = [NSIndexSet indexSetWithIndex:sectionIndex];
 		[self.tableView beginUpdates];
 		[self.tableView insertSections:indexSet withRowAnimation:UITableViewRowAnimationNone];

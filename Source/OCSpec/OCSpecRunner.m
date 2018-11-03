@@ -80,11 +80,11 @@ NSString *kOCSpecRunnerNotificationgroupFinished = @"kOCSpecRunnerNotificationgr
             group = [groupClass new];
 			group.index = idx;
 			group.specRunner = self;
-			[_exampleGroupInstances addObject:group];
+			[self.exampleGroupInstances addObject:group];
 			
 			// Notify delegates group will start
-			if ([_delegate respondsToSelector:@selector(exampleGroupDidStart:)]) {
-				[_delegate exampleGroupDidStart:group];
+			if ([self.delegate respondsToSelector:@selector(exampleGroupDidStart:)]) {
+				[self.delegate exampleGroupDidStart:group];
 			}
 			[[NSNotificationCenter defaultCenter] postNotificationName:kOCSpecRunnerNotificationGroupStarted object:group];
 
@@ -115,12 +115,12 @@ NSString *kOCSpecRunnerNotificationgroupFinished = @"kOCSpecRunnerNotificationgr
 					OCExampleResult *result = [OCExampleResult  withExample:example];
 					[group addResult:result];
 					group.currentResult = result;
-					[_runningResults addObject:result];
+					[self.runningResults addObject:result];
 
 					
 					// Notifiy delegates we are about to being an example
-					if ([_delegate respondsToSelector:@selector(exampleDidStart:)]) {
-						[_delegate exampleDidStart:result];
+					if ([self.delegate respondsToSelector:@selector(exampleDidStart:)]) {
+						[self.delegate exampleDidStart:result];
 					}					
 					[[NSNotificationCenter defaultCenter] postNotificationName:kOCSpecRunnerNotificationExampleStarted object:example];
 
@@ -132,8 +132,11 @@ NSString *kOCSpecRunnerNotificationgroupFinished = @"kOCSpecRunnerNotificationgr
                     @try {
 						// Run the example
 						result.startTime = CFAbsoluteTimeGetCurrent();
-//                        [groupInstance performSelector:mSel]; // ARC dislikes this
-						objc_msgSend(group,mSel);
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+						[group performSelector:mSel]; // ARC dislikes this
+#pragma diagnostoc pop
+//						objc_msgSend(group,mSel); // no longer here
 						if (NO == result.isDeferred) {
 							result.success = YES;
 						}
@@ -168,7 +171,7 @@ NSString *kOCSpecRunnerNotificationgroupFinished = @"kOCSpecRunnerNotificationgr
             NSLog(@"exception: %@",[e name]);
             NSLog(@"reason: %@",[e reason]);
             NSLog(@"stack: %@",[e callStackSymbols]);
-			if(_delegate && [_delegate respondsToSelector:@selector(exampleGroupDidFailWithError:)]) {
+			if(self.delegate && [self.delegate respondsToSelector:@selector(exampleGroupDidFailWithError:)]) {
 				NSDictionary *info = @{ kOCErrorInfoKeyGroup : groupClass, NSLocalizedDescriptionKey : [e reason] };
 				NSError *error = [NSError errorWithDomain:kOCSpecErrorDomain code:kOCSpecErrorCodeGroupFailed userInfo:info];
 				[self.delegate exampleGroupDidFailWithError:error];
@@ -177,8 +180,8 @@ NSString *kOCSpecRunnerNotificationgroupFinished = @"kOCSpecRunnerNotificationgr
         @finally {
             if(group) {
 				// Notify delegates group finished
-				if ([_delegate respondsToSelector:@selector(exampleGroupDidFinish:)]) {
-					[_delegate exampleGroupDidFinish:group];
+				if ([self.delegate respondsToSelector:@selector(exampleGroupDidFinish:)]) {
+					[self.delegate exampleGroupDidFinish:group];
 				}
 				[[NSNotificationCenter defaultCenter] postNotificationName:kOCSpecRunnerNotificationgroupFinished object:group];
 
@@ -189,7 +192,7 @@ NSString *kOCSpecRunnerNotificationgroupFinished = @"kOCSpecRunnerNotificationgr
                     }
                     @catch (NSException * e) {
                         NSLog(@"Error running %@.afterAll (%@)",groupClass,e);
-                        if(_delegate && [_delegate respondsToSelector:@selector(exampleGroupDidFailWithError:)]) {
+                        if(self.delegate && [self.delegate respondsToSelector:@selector(exampleGroupDidFailWithError:)]) {
 							NSDictionary *info = @{ kOCErrorInfoKeyGroup : groupClass, NSLocalizedDescriptionKey : [e reason] };
 							NSError *error = [NSError errorWithDomain:kOCSpecErrorDomain code:kOCSpecErrorCodeAfterAllFailed userInfo:info];
                             [self.delegate exampleGroupDidFailWithError:error];
@@ -210,7 +213,7 @@ NSString *kOCSpecRunnerNotificationgroupFinished = @"kOCSpecRunnerNotificationgr
     return _results;
 }
 
-- (void) deferResult:(OCExampleResult *)result untilDone:(void(^)())exampleBlock {
+- (void) deferResult:(OCExampleResult *)result untilDone:(void(^)(void))exampleBlock {
 	result.deferred = YES;
 	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
 		@try {

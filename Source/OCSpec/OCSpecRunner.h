@@ -66,7 +66,7 @@ extern NSString *kOCSpecRunnerNotificationgroupFinished;
 - (id) initWithExampleGroups:(NSArray *)someExampleGroups;
 
 - (NSSet *) run;
-- (void) deferResult:(OCExampleResult *)result untilDone:(void(^)())exampleBlock;
+- (void) deferResult:(OCExampleResult *)result untilDone:(void(^)(void))exampleBlock;
 
 - (NSString *) toHTML;
 

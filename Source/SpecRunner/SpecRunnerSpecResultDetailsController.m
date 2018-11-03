@@ -98,7 +98,11 @@ enum  {
 	[super setEditing:editing animated:animate];
 }
 
-- (BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation {
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
+	return UIInterfaceOrientationMaskAll;
+}
+
+- (BOOL)shouldAutorotate {
 	return YES;
 }
 
