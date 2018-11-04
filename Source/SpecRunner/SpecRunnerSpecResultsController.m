@@ -77,6 +77,13 @@ static NSString *kExampleSectionHeaderViewIdentifier = @"kExampleSectionHeaderVi
 	_resultsByGroup = [NSMutableDictionary new];
 }
 
+- (instancetype)initWithStyle:(UITableViewStyle)style {
+	self = [super initWithStyle:style];
+	if (self) {
+		[self initialize];
+	}
+	return self;
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];

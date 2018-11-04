@@ -45,6 +45,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {	  
 	
 	_window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+	_window.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
 
 	_specResultsController = [[SpecRunnerSpecResultsController alloc] initWithStyle:UITableViewStylePlain];
 	_navigationController = [[UINavigationController alloc] initWithRootViewController:_specResultsController];
